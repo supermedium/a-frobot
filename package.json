@@ -1,0 +1,26 @@
+{
+  "name": "afrobot",
+  "version": "1.0.0",
+  "description": "A-Frame GitHub bot.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngokevin/afro.git"
+  },
+  "keywords": [
+    "aframevr",
+    "aframe"
+  ],
+  "author": "Kevin Ngo <me@ngokevin.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ngokevin/afro/issues"
+  },
+  "homepage": "https://github.com/ngokevin/afro#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

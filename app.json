@@ -1,0 +1,8 @@
+{
+  "name": "afro",
+  "description": "A-Frame GitHub bot.",
+  "repository": "https://github.com/ngokevin/afro",
+  "logo": "https://aframe.io/images/aframe-logo.png",
+  "keywords": ["node", "express"],
+  "image": "heroku/nodejs"
+}
