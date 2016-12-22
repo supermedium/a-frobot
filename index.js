@@ -8,9 +8,11 @@ app.get('/', function (req, res) {
 })
 
 app.post('/postreceive', function (req, res) {
-  res.send(200);
+  res.send(req.body);
 })
 
 app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));
 })
+
+function bumpAframeDist (data) {}
