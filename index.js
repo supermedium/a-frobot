@@ -11,11 +11,24 @@ app.get('/', function (req, res) {
 })
 
 app.post('/postreceive', function (req, res) {
-  res.send(req.body);
+  var data = req.body;
+
+  if (data.repository.full_name === 'aframevr/aframe') {
+    bumpDist(data);
+  }
+
+  res.send(data);
 })
 
 app.listen(app.get('port'), function () {
   console.log('Node app is running on port', app.get('port'));
 })
 
-function bumpAframeDist (data) { }
+function bumpDist (data) {
+  var hasCodeChanges = data.repository.head_commit.modified.filter(function (file) {
+    return file.indexOf('src/' === 0) || file.indexOf('vendor/') === 0 ||
+           file === 'package.json';
+  }).length;
+
+  if (!hasCodeChanges) { return; }
+}
