@@ -1,14 +1,18 @@
 var bodyParser = require('body-parser');
-var execSync = require('child_process').execSync;
+var config = require('./config');
 var fs = require('fs');
+var execSync = require('child_process').execSync;
 var express = require('express');
 
 var app = express();
 
+var TOKEN = process.env.GITHUB_TOKEN;
+var REPO = config.repo;
+
 // Clone repository.
 if (!fs.existsSync('aframe')) {
   console.log('Cloning A-Frame repository...');
-  execSync('git clone git@github.com:ngokevin/aframe');
+  execSync(`git clone https://${TOKEN}@github.com:${repo}.git`);
 }
 
 // Git config.
@@ -50,5 +54,6 @@ function bumpDist (data) {
   execSync('npm install', {cwd: 'aframe'});  // Install.
   execSync('npm run dist', {cwd: 'aframe'});  // Bump.
   execSync('git commit -m "bump dist"', {cwd: 'aframe'});  // Commit.
-  execSync('git push origin master', {cwd: 'aframe'});  // Commit.
+  execSync(`git push https://${TOKEN}@github.com:${repo}.git master`,
+           {cwd: 'aframe'});  // Push.
 }
