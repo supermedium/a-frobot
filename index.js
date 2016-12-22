@@ -8,7 +8,6 @@ app.get('/', function (req, res) {
 })
 
 app.post('/postreceive', function (req, res) {
-  console.log(res);
   res.send(200);
 })
 
