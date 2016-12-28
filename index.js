@@ -12,7 +12,7 @@ var REPO = config.repo;
 // Clone repository.
 if (!fs.existsSync('aframe')) {
   console.log('Cloning A-Frame repository...');
-  execSync(`git clone https://${TOKEN}@github.com/${REPO}.git`);
+  execSync(`git clone https://${TOKEN}@github.com/${REPO}.git`, {stdio:[0, 1, 2]});
 }
 
 // Git config.
