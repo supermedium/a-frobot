@@ -12,7 +12,7 @@ var REPO = config.repo;
 // Clone repository.
 if (!fs.existsSync('aframe')) {
   console.log('Cloning A-Frame repository...');
-  execSync(`git clone https://${TOKEN}@github.com:${REPO}.git`);
+  execSync(`git clone https://${TOKEN}@github.com/${REPO}.git`);
 }
 
 // Git config.
@@ -54,6 +54,6 @@ function bumpDist (data) {
   execSync('npm install', {cwd: 'aframe'});  // Install.
   execSync('npm run dist', {cwd: 'aframe'});  // Bump.
   execSync('git commit -m "bump dist"', {cwd: 'aframe'});  // Commit.
-  execSync(`git push https://${TOKEN}@github.com:${REPO}.git master`,
+  execSync(`git push https://${TOKEN}@github.com/${REPO}.git master`,
            {cwd: 'aframe'});  // Push.
 }
