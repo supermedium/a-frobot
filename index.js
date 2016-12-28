@@ -16,7 +16,7 @@ if (!fs.existsSync('aframe')) {
 }
 
 // Git config.
-execSync('git config user.email aframebot@gmail.com');
+// execSync('git config user.email aframebot@gmail.com');
 
 // Set up Express.
 app.set('port', (process.env.PORT || 5000));
