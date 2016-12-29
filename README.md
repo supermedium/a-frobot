@@ -1,4 +1,4 @@
-# afro
+# a-frobot
 
 A-Frame GitHub bot.
 
@@ -24,13 +24,16 @@ heroku config:set GITHUB_TOKEN=abc123
 Give the GitHub bot account write access to the managed repositories.
 
 Get the Heroku URL and set up a GitHub webhook on the managed repositories
-pointing to `/postreceive`.
+pointing to `/postreceive`. Give the webhook a secret token and also set that
+as an environment variable called `SECRET_TOKEN`:
+
+```
+heroku config:set SECRET_TOKEN=def456
+```
 
 ### Helpful Commands
 
 ```sh
 heroku ps:scale web=1  # View running processes.
 heroku open  # Open in browser.
-heroic keys:add  # Add SSH key.
-heroic run bash  # SSH.
 ```

@@ -1,4 +1,5 @@
 var async = require('async');
+var bufferEq = require('buffer-equal-constant-time');
 var bodyParser = require('body-parser');
 var childProcess = require('child_process');
 var express = require('express');
@@ -8,8 +9,9 @@ var config = require('./config');
 
 var app = express();
 
-var TOKEN = process.env.GITHUB_TOKEN;
+var GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 var REPO = config.repo;
+var WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
 // Git config.
 childProcess.execSync('git config --global user.email aframebot@gmail.com');
@@ -19,13 +21,15 @@ childProcess.execSync('git config --global user.name A-frobot');
 new Promise((resolve, reject) => {
   if (fs.existsSync('aframe')) { return resolve(); }
 
-  childProcess.spawn('git', ['clone', `https://${TOKEN}@github.com/${REPO}.git`], {
+  childProcess.spawn('git', ['clone', `https://${GITHUB_TOKEN}@github.com/${REPO}.git`], {
     stdio: 'inherit'
   }).on('close', resolve);
 }).then(initApp);
 
+/**
+ * Express app.
+ */
 function initApp () {
-  // Set up Express.
   app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.json());
   app.get('/', function (req, res) {
@@ -34,7 +38,17 @@ function initApp () {
 
   // Webhook handler.
   app.post('/postreceive', function handler (req, res) {
-    var data = req.body;
+    let data = req.body;
+
+    // Validate payload.
+    let computedSig = new Buffer(
+      `sha1=${crypto.createHmac('sha1', SECRET_TOKEN).update(data).digest('hex')}`
+    );
+    let githubSig = new Buffer(req.headers['x-hub-signature']);
+    if (!bufferEq(computedSig, githubSig)) {
+      console.log('Received invalid GitHub webhook signature. Check SECRET_TOKEN.');
+      return;
+    }
 
     console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
 
@@ -66,7 +80,7 @@ function bumpAframeDist (data) {
       execAframeCommand('npm run dist'),
       execAframeCommand('git add dist'),
       execAframeCommand('git commit -m "bump dist"'),
-      execAframeCommand(`git push https://${TOKEN}@github.com/${REPO}.git master`)
+      execAframeCommand(`git push https://${GITHUB_TOKEN}@github.com/${REPO}.git master`)
     ], function asyncSeriesDone (err) {
       if (err) { return console.error(err); }
       console.log(`${REPO} dist successfully bumped!`);
