@@ -31,7 +31,14 @@ as an environment variable called `SECRET_TOKEN`:
 heroku config:set SECRET_TOKEN=def456
 ```
 
-### Helpful Commands
+## Setting up a Staging Environment
+
+```
+heroku create --remote staging
+heroku config:set NODE_ENV=staging --remote staging
+```
+
+## Helpful Commands
 
 ```sh
 heroku ps:scale web=1  # View running processes.
