@@ -36,7 +36,7 @@ function initApp () {
 
     console.log(`Received message for ${data.repository.full_name}.`);
 
-    if (data.repository.full_name === 'aframevr/aframe') {
+    if (data.repository.full_name === REPO) {
       bumpAframeDist(data);
     }
 
