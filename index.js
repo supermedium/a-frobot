@@ -61,7 +61,7 @@ function postHandler (data, githubSignature) {
   }
 
   console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
-  if (data.repository.full_name === REPO) {
+  if (data.repository.full_name === REPO && data.commits) {
     bumpAframeDist(data);
   }
   return 200;
