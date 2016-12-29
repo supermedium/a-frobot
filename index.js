@@ -73,7 +73,7 @@ function bumpAframeDist (data) {
     console.log(`Bumping ${REPO} dist...`);
     async.series([
       execAframeCommand('git pull --rebase origin master'),
-      execAframeCommand('npm install'),
+      execAframeCommand('NODE_ENV=dev npm install'),
       execAframeCommand('npm run dist'),
       execAframeCommand('git commit -m "bump dist"'),
       execAframeCommand(`git push https://${TOKEN}@github.com/${REPO}.git master`)

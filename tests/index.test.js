@@ -15,3 +15,19 @@ describe('hasAframeCodeChanges', () => {
     assert.ok(!AFRO.hasAframeCodeChanges(FIXTURE_AFRAME_COMMIT_DOCS));
   });
 });
+
+describe('bumpAframeDist', () => {
+  beforeEach(() => {
+  });
+
+  afterEach(() => {
+  });
+
+  it('detects when commit has code changes', () => {
+    assert.ok(AFRO.hasAframeCodeChanges(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON));
+  });
+
+  it('detects when commit does not have code changes', () => {
+    assert.ok(!AFRO.hasAframeCodeChanges(FIXTURE_AFRAME_COMMIT_DOCS));
+  });
+});
