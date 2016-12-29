@@ -36,7 +36,7 @@ function initApp () {
   app.post('/postreceive', function handler (req, res) {
     var data = req.body;
 
-    console.log(`Received message for ${data.repository.full_name}.`);
+    console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
 
     if (data.repository.full_name === REPO) {
       bumpAframeDist(data);
@@ -62,6 +62,7 @@ function bumpAframeDist (data) {
    */
   function execAframeCommand (command) {
     return callback => {
+      console.log(`Running ${command}...`);
       childProcess.exec(command, {cwd: 'aframe', stdio: 'inherit'}, (err, stdout)  => {
         if (err) { console.error(err); }
         callback();
@@ -73,14 +74,15 @@ function bumpAframeDist (data) {
     console.log(`Bumping ${REPO} dist...`);
     async.series([
       execAframeCommand('git pull --rebase origin master'),
-      execAframeCommand('node --max-old-space-size=400 /app/.heroku/node/bin/npm install'),
-      execAframeCommand('node --max-old-space-size=400 /app/.heroku/node/bin/npm install --only="dev"'),
+      execAframeCommand('node --max-old-space-size=200 /app/.heroku/node/bin/npm install'),
+      execAframeCommand('node --max-old-space-size=200 /app/.heroku/node/bin/npm install --only="dev"'),
       execAframeCommand('npm run dist'),
       execAframeCommand('git add dist'),
       execAframeCommand('git commit -m "bump dist"'),
       execAframeCommand(`git push https://${TOKEN}@github.com/${REPO}.git master`)
     ], function asyncSeriesDone (err) {
-      if (err) { console.error(err); }
+      if (err) { return console.error(err); }
+      console.log(`${REPO} dist successfully bumped!`);
       resolve(true);
     });
   });
