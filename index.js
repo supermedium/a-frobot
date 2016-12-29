@@ -15,8 +15,10 @@ var REPO = config.repo;
 var WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
 // Git config.
-childProcess.execSync('git config --global user.email aframebot@gmail.com');
-childProcess.execSync('git config --global user.name A-frobot');
+if (process.env.NODE_ENV !== 'test') {
+  childProcess.execSync('git config --global user.email aframebot@gmail.com');
+  childProcess.execSync('git config --global user.name A-frobot');
+}
 
 // Clone repository.
 new Promise((resolve, reject) => {
@@ -25,12 +27,12 @@ new Promise((resolve, reject) => {
   childProcess.spawn('git', ['clone', `https://${GITHUB_TOKEN}@github.com/${REPO}.git`], {
     stdio: 'inherit'
   }).on('close', resolve);
-}).then(initApp);
+}).then(initExpressApp);
 
 /**
  * Express app.
  */
-function initApp () {
+function initExpressApp () {
   app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.json());
   app.get('/', function (req, res) {
