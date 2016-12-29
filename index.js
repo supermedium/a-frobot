@@ -12,7 +12,7 @@ var app = express();
 
 var GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 var REPO = config.repo;
-var WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
+var WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
 // Git config.
 childProcess.execSync('git config --global user.email aframebot@gmail.com');
@@ -43,7 +43,7 @@ function initApp () {
 
     // Validate payload.
     let computedSig = new Buffer(
-      `sha1=${crypto.createHmac('sha1', SECRET_TOKEN).update(data).digest('hex')}`
+      `sha1=${crypto.createHmac('sha1', WEBHOOK_SECRET).update(data).digest('hex')}`
     );
     let githubSig = new Buffer(req.headers['x-hub-signature']);
     if (!bufferEq(computedSig, githubSig)) {
