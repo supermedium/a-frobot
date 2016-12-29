@@ -12,16 +12,16 @@ var REPO = config.repo;
 // Clone repository.
 var repositoryCloned = new Promise((resolve, reject) => {
   if (fs.existsSync('aframe')) { return resolve(); }
-  let stream = spawn(`git clone https://${TOKEN}@github.com/${REPO}.git`);
-  stream.stdout.on('data', console.log);
-  stream.stderr.on('data', console.error);
-  stream.on('close', resolve);
+
+  spawn('git', ['clone', `https://${TOKEN}@github.com/${REPO}.git`], {
+    stdio: 'inherit'
+  }).on('close', resolve);
 });
 
 // Git config.
 // execSync('git config user.email aframebot@gmail.com');
 
-stream.then(() => {
+repositoryCloned.then(() => {
   // Set up Express.
   app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.json());
