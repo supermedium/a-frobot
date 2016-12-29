@@ -14,8 +14,8 @@ var REPO = config.repo;
 // Git config.
 childProcess.execSync('git config --global user.email aframebot@gmail.com');
 childProcess.execSync('git config --global user.name A-frobot');
-childProcess.execSync('git fetch --all');
-childProcess.execSync('git reset --hard origin/master');
+childProcess.execSync('git fetch --all', {cwd: 'aframe'});
+childProcess.execSync('git reset --hard origin/master', {cwd: 'aframe'});
 
 // Clone repository.
 new Promise((resolve, reject) => {
