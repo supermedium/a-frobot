@@ -76,6 +76,7 @@ function bumpAframeDist (data) {
       execAframeCommand('npm install'),
       execAframeCommand('npm install --only=dev'),
       execAframeCommand('npm run dist'),
+      execAframeCommand('git add dist'),
       execAframeCommand('git commit -m "bump dist"'),
       execAframeCommand(`git push https://${TOKEN}@github.com/${REPO}.git master`)
     ], function asyncSeriesDone (err) {
