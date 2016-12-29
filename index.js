@@ -11,6 +11,10 @@ var app = express();
 var TOKEN = process.env.GITHUB_TOKEN;
 var REPO = config.repo;
 
+// Git config.
+execSync('git config --global user.email aframebot@gmail.com');
+execSync('git config --global user.name A-frobot');
+
 // Clone repository.
 new Promise((resolve, reject) => {
   if (fs.existsSync('aframe')) { return resolve(); }
@@ -19,9 +23,6 @@ new Promise((resolve, reject) => {
     stdio: 'inherit'
   }).on('close', resolve);
 }).then(initApp);
-
-// Git config.
-// execSync('git config user.email aframebot@gmail.com');
 
 function initApp () {
   // Set up Express.
