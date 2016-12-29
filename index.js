@@ -12,8 +12,8 @@ var TOKEN = process.env.GITHUB_TOKEN;
 var REPO = config.repo;
 
 // Git config.
-execSync('git config --global user.email aframebot@gmail.com');
-execSync('git config --global user.name A-frobot');
+childProcess.execSync('git config --global user.email aframebot@gmail.com');
+childProcess.execSync('git config --global user.name A-frobot');
 
 // Clone repository.
 new Promise((resolve, reject) => {
