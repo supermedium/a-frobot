@@ -2,6 +2,7 @@ var async = require('async');
 var bufferEq = require('buffer-equal-constant-time');
 var bodyParser = require('body-parser');
 var childProcess = require('child_process');
+var crypto = require('crypto');
 var express = require('express');
 var fs = require('fs');
 
