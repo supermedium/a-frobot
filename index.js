@@ -55,9 +55,9 @@ function initApp () {
 function bumpAframeDist (data) {
   if (!hasAframeCodeChanges(data)) { return Promise.resolve(false); }
 
-  console.log('Bumping aframevr/aframe dist...');
+  console.log(`Bumping ${REPO} dist...`);
   return new Promise(resolve => {
-    exec([
+    childProcess.exec([
       'git pull --rebase origin master',
       'npm install',
       'npm run dist',
