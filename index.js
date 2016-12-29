@@ -16,8 +16,8 @@ var WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
 // Git config.
 if (process.env.NODE_ENV !== 'test') {
-  childProcess.execSync('git config --global user.email aframebot@gmail.com');
-  childProcess.execSync('git config --global user.name A-frobot');
+  childProcess.execSync(`git config --global user.email ${config.userEmail}`);
+  childProcess.execSync(`git config --global user.name ${config.userName}`);
 }
 
 // Clone repository.
@@ -81,7 +81,7 @@ module.exports.computeSignature= computeSignature;
  * Bump A-Frame master build on every commit.
  */
 function bumpAframeDist (data) {
-  if (!hasAframeCodeChanges(data)) { return Promise.resolve(false); }
+  if (!shouldBumpAframeDist(data)) { return Promise.resolve(false); }
 
   return new Promise(resolve => {
     console.log(`Bumping ${REPO} dist...`);
@@ -91,7 +91,7 @@ function bumpAframeDist (data) {
       execAframeCommand('node --max-old-space-size=200 /app/.heroku/node/bin/npm install --only="dev"'),
       execAframeCommand('npm run dist'),
       execAframeCommand('git add dist'),
-      execAframeCommand('git commit -m "bump dist"'),
+      execAframeCommand('git commit -m "Bump aframe-master dist/ builds."'),
       execAframeCommand(`git push https://${GITHUB_TOKEN}@github.com/${REPO}.git master`)
     ], function asyncSeriesDone (err) {
       if (err) { return console.error(err); }
@@ -119,10 +119,24 @@ module.exports.execAframeCommand = execAframeCommand;
 /**
  * Check if A-Frame commit has actual code changes.
  */
-function hasAframeCodeChanges (data) {
-  return data.head_commit.modified.filter(function (file) {
-    return file.indexOf('src/') === 0 || file.indexOf('vendor/') === 0 ||
-           file === 'package.json';
-  }).length !== 0;
+function shouldBumpAframeDist (data) {
+  function commitHasCodeChanges (commit) {
+     return commit.modified.filter(function (file) {
+      return file.indexOf('src/') === 0 || file.indexOf('vendor/') === 0 ||
+             file === 'package.json';
+    }).length !== 0;
+  }
+
+  let hasCodeChanges = false;
+  data.commits.forEach(commit => {
+    if (commitHasCodeChanges(commit)) {
+      hasCodeChanges = true;
+    }
+  });
+
+  let isFromBot = data.head_commit.committer.email === config.userEmail ||
+                  data.head_commit.committer.username === config.userName;
+
+  return hasCodeChanges && !isFromBot;
 }
-module.exports.hasAframeCodeChanges = hasAframeCodeChanges;
+module.exports.shouldBumpAframeDist = shouldBumpAframeDist;

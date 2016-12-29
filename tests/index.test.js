@@ -4,7 +4,9 @@ var sinon = require('sinon');
 
 var AFRO = require('../index');
 
+var FIXTURE_AFRAME_COMMIT_BOT = require('./fixtures/aframeCommitBot');
 var FIXTURE_AFRAME_COMMIT_DOCS = require('./fixtures/aframeCommitDocs');
+var FIXTURE_AFRAME_COMMIT_MULTI = require('./fixtures/aframeCommitMulti');
 var FIXTURE_AFRAME_COMMIT_PACKAGE_JSON = require('./fixtures/aframeCommitPackageJson');
 
 describe('postHandler', () => {
@@ -45,13 +47,20 @@ describe('bumpAframeDist', () => {
   });
 });
 
-describe('hasAframeCodeChanges', () => {
-  it('detects when commit has code changes', () => {
-    assert.ok(AFRO.hasAframeCodeChanges(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON));
+describe('shouldBumpAframeDist', () => {
+  it('should bump when commit has package.json changes', () => {
+    assert.ok(AFRO.shouldBumpAframeDist(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON));
   });
 
-  it('detects when commit does not have code changes', () => {
-    assert.ok(!AFRO.hasAframeCodeChanges(FIXTURE_AFRAME_COMMIT_DOCS));
+  it('should bump when there are multiple commits and one has code changes', () => {
+    assert.ok(AFRO.shouldBumpAframeDist(FIXTURE_AFRAME_COMMIT_MULTI));
+  });
+
+  it('should not bump when commit is doc changes', () => {
+    assert.ok(!AFRO.shouldBumpAframeDist(FIXTURE_AFRAME_COMMIT_DOCS));
+  });
+
+  it('should not bumo when commit is from the bot', () => {
+    assert.ok(!AFRO.shouldBumpAframeDist(FIXTURE_AFRAME_COMMIT_BOT));
   });
 });
-

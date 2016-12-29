@@ -1,0 +1,170 @@
+{
+  "ref": "refs/heads/master",
+  "before": "f05f0c49b24ce5aac6cea9aa3fa205846a5a0e16",
+  "after": "bc84cc2762582d4d272f53032469d00e20ca7478",
+  "created": false,
+  "deleted": false,
+  "forced": false,
+  "base_ref": null,
+  "compare": "https://github.com/ngokevin/aframe/compare/f05f0c49b24c...bc84cc276258",
+  "commits": [
+    {
+      "id": "bc84cc2762582d4d272f53032469d00e20ca7478",
+      "tree_id": "6e222d8274ed5e7d1309b10651b7195915cffa20",
+      "distinct": true,
+      "message": "bump dist",
+      "timestamp": "2016-12-29T22:03:10Z",
+      "url": "https://github.com/ngokevin/aframe/commit/bc84cc2762582d4d272f53032469d00e20ca7478",
+      "author": {
+        "name": "A-frobot",
+        "email": "aframebot@gmail.com",
+        "username": "a-frobot"
+      },
+      "committer": {
+        "name": "A-frobot",
+        "email": "aframebot@gmail.com",
+        "username": "a-frobot"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "dist/aframe-master.js",
+        "dist/aframe-master.js.map",
+        "dist/aframe-master.min.js",
+        "dist/aframe-master.min.js.map"
+      ]
+    }
+  ],
+  "head_commit": {
+    "id": "bc84cc2762582d4d272f53032469d00e20ca7478",
+    "tree_id": "6e222d8274ed5e7d1309b10651b7195915cffa20",
+    "distinct": true,
+    "message": "bump dist",
+    "timestamp": "2016-12-29T22:03:10Z",
+    "url": "https://github.com/ngokevin/aframe/commit/bc84cc2762582d4d272f53032469d00e20ca7478",
+    "author": {
+      "name": "A-frobot",
+      "email": "aframebot@gmail.com",
+      "username": "a-frobot"
+    },
+    "committer": {
+      "name": "A-frobot",
+      "email": "aframebot@gmail.com",
+      "username": "a-frobot"
+    },
+    "added": [
+
+    ],
+    "removed": [
+
+    ],
+    "modified": [
+      "dist/aframe-master.js",
+      "dist/aframe-master.js.map",
+      "dist/aframe-master.min.js",
+      "dist/aframe-master.min.js.map"
+    ]
+  },
+  "repository": {
+    "id": 48299418,
+    "name": "aframe",
+    "full_name": "ngokevin/aframe",
+    "owner": {
+      "name": "ngokevin",
+      "email": "me@ngokevin.com"
+    },
+    "private": false,
+    "html_url": "https://github.com/ngokevin/aframe",
+    "description": "Building Blocks for the VR Web",
+    "fork": true,
+    "url": "https://github.com/ngokevin/aframe",
+    "forks_url": "https://api.github.com/repos/ngokevin/aframe/forks",
+    "keys_url": "https://api.github.com/repos/ngokevin/aframe/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/ngokevin/aframe/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/ngokevin/aframe/teams",
+    "hooks_url": "https://api.github.com/repos/ngokevin/aframe/hooks",
+    "issue_events_url": "https://api.github.com/repos/ngokevin/aframe/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/ngokevin/aframe/events",
+    "assignees_url": "https://api.github.com/repos/ngokevin/aframe/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/ngokevin/aframe/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/ngokevin/aframe/tags",
+    "blobs_url": "https://api.github.com/repos/ngokevin/aframe/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/ngokevin/aframe/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/ngokevin/aframe/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/ngokevin/aframe/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/ngokevin/aframe/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/ngokevin/aframe/languages",
+    "stargazers_url": "https://api.github.com/repos/ngokevin/aframe/stargazers",
+    "contributors_url": "https://api.github.com/repos/ngokevin/aframe/contributors",
+    "subscribers_url": "https://api.github.com/repos/ngokevin/aframe/subscribers",
+    "subscription_url": "https://api.github.com/repos/ngokevin/aframe/subscription",
+    "commits_url": "https://api.github.com/repos/ngokevin/aframe/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/ngokevin/aframe/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/ngokevin/aframe/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/ngokevin/aframe/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/ngokevin/aframe/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/ngokevin/aframe/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/ngokevin/aframe/merges",
+    "archive_url": "https://api.github.com/repos/ngokevin/aframe/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/ngokevin/aframe/downloads",
+    "issues_url": "https://api.github.com/repos/ngokevin/aframe/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/ngokevin/aframe/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/ngokevin/aframe/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/ngokevin/aframe/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/ngokevin/aframe/labels{/name}",
+    "releases_url": "https://api.github.com/repos/ngokevin/aframe/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/ngokevin/aframe/deployments",
+    "created_at": 1450564265,
+    "updated_at": "2016-11-08T20:58:11Z",
+    "pushed_at": 1483049005,
+    "git_url": "git://github.com/ngokevin/aframe.git",
+    "ssh_url": "git@github.com:ngokevin/aframe.git",
+    "clone_url": "https://github.com/ngokevin/aframe.git",
+    "svn_url": "https://github.com/ngokevin/aframe",
+    "homepage": "https://aframe.io/",
+    "size": 148258,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "language": "JavaScript",
+    "has_issues": false,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": true,
+    "forks_count": 0,
+    "mirror_url": null,
+    "open_issues_count": 0,
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 2,
+    "default_branch": "master",
+    "stargazers": 2,
+    "master_branch": "master"
+  },
+  "pusher": {
+    "name": "a-frobot",
+    "email": "aframebot@gmail.com"
+  },
+  "sender": {
+    "login": "a-frobot",
+    "id": 24716791,
+    "avatar_url": "https://avatars.githubusercontent.com/u/24716791?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/a-frobot",
+    "html_url": "https://github.com/a-frobot",
+    "followers_url": "https://api.github.com/users/a-frobot/followers",
+    "following_url": "https://api.github.com/users/a-frobot/following{/other_user}",
+    "gists_url": "https://api.github.com/users/a-frobot/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/a-frobot/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/a-frobot/subscriptions",
+    "organizations_url": "https://api.github.com/users/a-frobot/orgs",
+    "repos_url": "https://api.github.com/users/a-frobot/repos",
+    "events_url": "https://api.github.com/users/a-frobot/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/a-frobot/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}
