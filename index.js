@@ -67,7 +67,7 @@ function bumpAframeDist (data) {
       if (err) { console.log(err); }
       resolve(true);
     });
-  });
+  }).catch(console.error);
 }
 module.exports.bumpAframeDist = bumpAframeDist;
 
