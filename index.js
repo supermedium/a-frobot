@@ -1,8 +1,9 @@
 var bodyParser = require('body-parser');
-var config = require('./config');
+var childProcess = require('child_process');
 var express = require('express');
 var fs = require('fs');
-var spawn = require('child_process').spawn;
+
+var config = require('./config');
 
 var app = express();
 
@@ -13,7 +14,7 @@ var REPO = config.repo;
 var repositoryCloned = new Promise((resolve, reject) => {
   if (fs.existsSync('aframe')) { return resolve(); }
 
-  spawn('git', ['clone', `https://${TOKEN}@github.com/${REPO}.git`], {
+  childProcess.spawn('git', ['clone', `https://${TOKEN}@github.com/${REPO}.git`], {
     stdio: 'inherit'
   }).on('close', resolve);
 });
@@ -22,8 +23,6 @@ var repositoryCloned = new Promise((resolve, reject) => {
 // execSync('git config user.email aframebot@gmail.com');
 
 repositoryCloned.then(() => {
-  spawn('ls', {stdio: 'inherit'});
-
   // Set up Express.
   app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.json());
@@ -56,11 +55,14 @@ repositoryCloned.then(() => {
 
     if (!hasCodeChanges) { return; }
 
-    execSync('git pull --rebase origin master', {cwd: 'aframe'});  // Rebase.
-    execSync('npm install', {cwd: 'aframe'});  // Install.
-    execSync('npm run dist', {cwd: 'aframe'});  // Bump.
-    execSync('git commit -m "bump dist"', {cwd: 'aframe'});  // Commit.
-    execSync(`git push https://${TOKEN}@github.com/${REPO}.git master`,
-             {cwd: 'aframe'});  // Push.
+    exec([
+      'git pull --rebase origin master',
+      'npm install',
+      'npm run dist',
+      'git commit -m "bump dist"',
+      `git push https://${TOKEN}@github.com/${REPO}.git master`
+    ].join(' && '), {cwd: 'aframe'}, (err, stdout, stderr) => {
+      console.log(stdout);
+    });
   }
 });
