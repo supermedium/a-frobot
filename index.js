@@ -11,18 +11,18 @@ var TOKEN = process.env.GITHUB_TOKEN;
 var REPO = config.repo;
 
 // Clone repository.
-var repositoryCloned = new Promise((resolve, reject) => {
+new Promise((resolve, reject) => {
   if (fs.existsSync('aframe')) { return resolve(); }
 
   childProcess.spawn('git', ['clone', `https://${TOKEN}@github.com/${REPO}.git`], {
     stdio: 'inherit'
   }).on('close', resolve);
-});
+}).then(initApp);
 
 // Git config.
 // execSync('git config user.email aframebot@gmail.com');
 
-repositoryCloned.then(() => {
+function initApp () {
   // Set up Express.
   app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.json());
@@ -31,13 +31,13 @@ repositoryCloned.then(() => {
   })
 
   // Webhook handler.
-  app.post('/postreceive', function (req, res) {
+  app.post('/postreceive', function handler (req, res) {
     var data = req.body;
 
     console.log(`Received message for ${data.repository.full_name}.`);
 
     if (data.repository.full_name === 'aframevr/aframe') {
-      bumpDist(data);
+      bumpAframeDist(data);
     }
 
     res.send(data);
@@ -47,25 +47,36 @@ repositoryCloned.then(() => {
   app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
   })
+}
 
-  // Bump A-Frame master build on every commit.
-  function bumpDist (data) {
-    var hasCodeChanges = data.repository.head_commit.modified.filter(function (file) {
-      return file.indexOf('src/' === 0) || file.indexOf('vendor/') === 0 ||
-             file === 'package.json';
-    }).length;
+/**
+ * Bump A-Frame master build on every commit.
+ */
+function bumpAframeDist (data) {
+  if (!hasAframeCodeChanges(data)) { return Promise.resolve(false); }
 
-    if (!hasCodeChanges) { return; }
-
-    console.log('Bumping aframevr/aframe dist...');
+  console.log('Bumping aframevr/aframe dist...');
+  return new Promise(resolve => {
     exec([
       'git pull --rebase origin master',
       'npm install',
       'npm run dist',
       'git commit -m "bump dist"',
       `git push https://${TOKEN}@github.com/${REPO}.git master`
-    ].join(' && '), {cwd: 'aframe'}, (err, stdout, stderr) => {
-      console.log(stdout);
+    ].join(' && '), {cwd: 'aframe', stdio: 'inherit'}, (err, stdout, stderr) => {
+      resolve(true);
     });
-  }
-});
+  });
+}
+module.exports.bumpAframeDist = bumpAframeDist;
+
+/**
+ * Check if A-Frame commit has actual code changes.
+ */
+function hasAframeCodeChanges (data) {
+  return data.head_commit.modified.filter(function (file) {
+    return file.indexOf('src/') === 0 || file.indexOf('vendor/') === 0 ||
+           file === 'package.json';
+  }).length !== 0;
+}
+module.exports.hasAframeCodeChanges = hasAframeCodeChanges;

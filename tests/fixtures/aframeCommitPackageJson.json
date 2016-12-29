@@ -1,0 +1,246 @@
+{
+  "ref": "refs/heads/master",
+  "before": "41b92390eb04f4153bab7bc48c6687f4fac26903",
+  "after": "09f984c0bde88b3e9569efe716ae1667f689f6ba",
+  "created": false,
+  "deleted": false,
+  "forced": true,
+  "base_ref": null,
+  "compare": "https://github.com/ngokevin/aframe/compare/41b92390eb04...09f984c0bde8",
+  "commits": [
+    {
+      "id": "a69e502eac457a93d4a4de3e91b0a9d5569dc8e0",
+      "tree_id": "50190f6a70c092bb270a11775c3591098629a42b",
+      "distinct": true,
+      "message": "[docs] Fix material properties (#2197)\n\nFor distortion map properties such as `displacementScale`, `displacementBias` and `normalScale`",
+      "timestamp": "2016-12-21T01:04:37-08:00",
+      "url": "https://github.com/ngokevin/aframe/commit/a69e502eac457a93d4a4de3e91b0a9d5569dc8e0",
+      "author": {
+        "name": "Jordan Santell",
+        "email": "jsantell@users.noreply.github.com",
+        "username": "jsantell"
+      },
+      "committer": {
+        "name": "Kevin Ngo",
+        "email": "me@ngokevin.com",
+        "username": "ngokevin"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "docs/components/material.md"
+      ]
+    },
+    {
+      "id": "4a676afa89d0245db84f996d33f1c48cc41b8b4f",
+      "tree_id": "e447ae43ea06978c0cc099011d4749f7093e9c86",
+      "distinct": true,
+      "message": "address throttle nits in docs/comments",
+      "timestamp": "2016-12-21T02:50:17-08:00",
+      "url": "https://github.com/ngokevin/aframe/commit/4a676afa89d0245db84f996d33f1c48cc41b8b4f",
+      "author": {
+        "name": "Kevin Ngo",
+        "email": "me@ngokevin.com",
+        "username": "ngokevin"
+      },
+      "committer": {
+        "name": "Kevin Ngo",
+        "email": "me@ngokevin.com",
+        "username": "ngokevin"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "docs/core/utils.md",
+        "src/utils/index.js"
+      ]
+    },
+    {
+      "id": "d56c9884ddfc492d2eec6ee6694139154e0c45d6",
+      "tree_id": "6136126a3a98473e0f0555f6c171629916c5dee6",
+      "distinct": true,
+      "message": "remove accidental file",
+      "timestamp": "2016-12-21T14:10:04-08:00",
+      "url": "https://github.com/ngokevin/aframe/commit/d56c9884ddfc492d2eec6ee6694139154e0c45d6",
+      "author": {
+        "name": "Kevin Ngo",
+        "email": "me@ngokevin.com",
+        "username": "ngokevin"
+      },
+      "committer": {
+        "name": "Kevin Ngo",
+        "email": "me@ngokevin.com",
+        "username": "ngokevin"
+      },
+      "added": [
+
+      ],
+      "removed": [
+        ":w"
+      ],
+      "modified": [
+
+      ]
+    },
+    {
+      "id": "09f984c0bde88b3e9569efe716ae1667f689f6ba",
+      "tree_id": "9800dc39474df35bf11229789fd3c1f62ceb4a98",
+      "distinct": true,
+      "message": "test webhook",
+      "timestamp": "2016-12-22T05:06:02-08:00",
+      "url": "https://github.com/ngokevin/aframe/commit/09f984c0bde88b3e9569efe716ae1667f689f6ba",
+      "author": {
+        "name": "Kevin Ngo",
+        "email": "me@ngokevin.com",
+        "username": "ngokevin"
+      },
+      "committer": {
+        "name": "Kevin Ngo",
+        "email": "me@ngokevin.com",
+        "username": "ngokevin"
+      },
+      "added": [
+
+      ],
+      "removed": [
+
+      ],
+      "modified": [
+        "package.json"
+      ]
+    }
+  ],
+  "head_commit": {
+    "id": "09f984c0bde88b3e9569efe716ae1667f689f6ba",
+    "tree_id": "9800dc39474df35bf11229789fd3c1f62ceb4a98",
+    "distinct": true,
+    "message": "test webhook",
+    "timestamp": "2016-12-22T05:06:02-08:00",
+    "url": "https://github.com/ngokevin/aframe/commit/09f984c0bde88b3e9569efe716ae1667f689f6ba",
+    "author": {
+      "name": "Kevin Ngo",
+      "email": "me@ngokevin.com",
+      "username": "ngokevin"
+    },
+    "committer": {
+      "name": "Kevin Ngo",
+      "email": "me@ngokevin.com",
+      "username": "ngokevin"
+    },
+    "added": [
+
+    ],
+    "removed": [
+
+    ],
+    "modified": [
+      "package.json"
+    ]
+  },
+  "repository": {
+    "id": 48299418,
+    "name": "aframe",
+    "full_name": "ngokevin/aframe",
+    "owner": {
+      "name": "ngokevin",
+      "email": "me@ngokevin.com"
+    },
+    "private": false,
+    "html_url": "https://github.com/ngokevin/aframe",
+    "description": "Building Blocks for the VR Web",
+    "fork": true,
+    "url": "https://github.com/ngokevin/aframe",
+    "forks_url": "https://api.github.com/repos/ngokevin/aframe/forks",
+    "keys_url": "https://api.github.com/repos/ngokevin/aframe/keys{/key_id}",
+    "collaborators_url": "https://api.github.com/repos/ngokevin/aframe/collaborators{/collaborator}",
+    "teams_url": "https://api.github.com/repos/ngokevin/aframe/teams",
+    "hooks_url": "https://api.github.com/repos/ngokevin/aframe/hooks",
+    "issue_events_url": "https://api.github.com/repos/ngokevin/aframe/issues/events{/number}",
+    "events_url": "https://api.github.com/repos/ngokevin/aframe/events",
+    "assignees_url": "https://api.github.com/repos/ngokevin/aframe/assignees{/user}",
+    "branches_url": "https://api.github.com/repos/ngokevin/aframe/branches{/branch}",
+    "tags_url": "https://api.github.com/repos/ngokevin/aframe/tags",
+    "blobs_url": "https://api.github.com/repos/ngokevin/aframe/git/blobs{/sha}",
+    "git_tags_url": "https://api.github.com/repos/ngokevin/aframe/git/tags{/sha}",
+    "git_refs_url": "https://api.github.com/repos/ngokevin/aframe/git/refs{/sha}",
+    "trees_url": "https://api.github.com/repos/ngokevin/aframe/git/trees{/sha}",
+    "statuses_url": "https://api.github.com/repos/ngokevin/aframe/statuses/{sha}",
+    "languages_url": "https://api.github.com/repos/ngokevin/aframe/languages",
+    "stargazers_url": "https://api.github.com/repos/ngokevin/aframe/stargazers",
+    "contributors_url": "https://api.github.com/repos/ngokevin/aframe/contributors",
+    "subscribers_url": "https://api.github.com/repos/ngokevin/aframe/subscribers",
+    "subscription_url": "https://api.github.com/repos/ngokevin/aframe/subscription",
+    "commits_url": "https://api.github.com/repos/ngokevin/aframe/commits{/sha}",
+    "git_commits_url": "https://api.github.com/repos/ngokevin/aframe/git/commits{/sha}",
+    "comments_url": "https://api.github.com/repos/ngokevin/aframe/comments{/number}",
+    "issue_comment_url": "https://api.github.com/repos/ngokevin/aframe/issues/comments{/number}",
+    "contents_url": "https://api.github.com/repos/ngokevin/aframe/contents/{+path}",
+    "compare_url": "https://api.github.com/repos/ngokevin/aframe/compare/{base}...{head}",
+    "merges_url": "https://api.github.com/repos/ngokevin/aframe/merges",
+    "archive_url": "https://api.github.com/repos/ngokevin/aframe/{archive_format}{/ref}",
+    "downloads_url": "https://api.github.com/repos/ngokevin/aframe/downloads",
+    "issues_url": "https://api.github.com/repos/ngokevin/aframe/issues{/number}",
+    "pulls_url": "https://api.github.com/repos/ngokevin/aframe/pulls{/number}",
+    "milestones_url": "https://api.github.com/repos/ngokevin/aframe/milestones{/number}",
+    "notifications_url": "https://api.github.com/repos/ngokevin/aframe/notifications{?since,all,participating}",
+    "labels_url": "https://api.github.com/repos/ngokevin/aframe/labels{/name}",
+    "releases_url": "https://api.github.com/repos/ngokevin/aframe/releases{/id}",
+    "deployments_url": "https://api.github.com/repos/ngokevin/aframe/deployments",
+    "created_at": 1450564265,
+    "updated_at": "2016-11-08T20:58:11Z",
+    "pushed_at": 1482411976,
+    "git_url": "git://github.com/ngokevin/aframe.git",
+    "ssh_url": "git@github.com:ngokevin/aframe.git",
+    "clone_url": "https://github.com/ngokevin/aframe.git",
+    "svn_url": "https://github.com/ngokevin/aframe",
+    "homepage": "https://aframe.io/",
+    "size": 146533,
+    "stargazers_count": 2,
+    "watchers_count": 2,
+    "language": "JavaScript",
+    "has_issues": false,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": true,
+    "forks_count": 0,
+    "mirror_url": null,
+    "open_issues_count": 0,
+    "forks": 0,
+    "open_issues": 0,
+    "watchers": 2,
+    "default_branch": "master",
+    "stargazers": 2,
+    "master_branch": "master"
+  },
+  "pusher": {
+    "name": "ngokevin",
+    "email": "me@ngokevin.com"
+  },
+  "sender": {
+    "login": "ngokevin",
+    "id": 674727,
+    "avatar_url": "https://avatars.githubusercontent.com/u/674727?v=3",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/ngokevin",
+    "html_url": "https://github.com/ngokevin",
+    "followers_url": "https://api.github.com/users/ngokevin/followers",
+    "following_url": "https://api.github.com/users/ngokevin/following{/other_user}",
+    "gists_url": "https://api.github.com/users/ngokevin/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/ngokevin/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/ngokevin/subscriptions",
+    "organizations_url": "https://api.github.com/users/ngokevin/orgs",
+    "repos_url": "https://api.github.com/users/ngokevin/repos",
+    "events_url": "https://api.github.com/users/ngokevin/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/ngokevin/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}
