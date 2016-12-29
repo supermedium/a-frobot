@@ -64,6 +64,7 @@ function bumpAframeDist (data) {
       'git commit -m "bump dist"',
       `git push https://${TOKEN}@github.com/${REPO}.git master`
     ].join(' && '), {cwd: 'aframe', stdio: 'inherit'}, (err, stdout, stderr) => {
+      if (err) { console.log(err); }
       resolve(true);
     });
   });
