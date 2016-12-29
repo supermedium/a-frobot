@@ -39,24 +39,7 @@ function initApp () {
 
   // Webhook handler.
   app.post('/postreceive', function handler (req, res) {
-    let data = req.body;
-
-    // Validate payload.
-    let computedSig = new Buffer(
-      `sha1=${crypto.createHmac('sha1', WEBHOOK_SECRET).update(data).digest('hex')}`
-    );
-    let githubSig = new Buffer(req.headers['x-hub-signature']);
-    if (!bufferEq(computedSig, githubSig)) {
-      console.log('Received invalid GitHub webhook signature. Check SECRET_TOKEN.');
-      return;
-    }
-
-    console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
-
-    if (data.repository.full_name === REPO) {
-      bumpAframeDist(data);
-    }
-
+    postHandler(req.body, req.headers['x-hub-signature']);
     res.send(data);
   })
 
@@ -65,6 +48,33 @@ function initApp () {
     console.log('Node app is running on port', app.get('port'));
   })
 }
+
+/**
+ * Handle webhook.
+ */
+function postHandler (data, githubSignature) {
+  // Validate payload.
+  if (!bufferEq(new Buffer(computeSignature(data)), new Buffer(githubSignature))) {
+    console.log('Received invalid GitHub webhook signature. Check SECRET_TOKEN.');
+    return false;
+  }
+
+  console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
+  if (data.repository.full_name === REPO) {
+    bumpAframeDist(data);
+  }
+  return true;
+}
+module.exports.postHandler = postHandler;
+
+/**
+ * Compute signature using secret token for validation.
+ */
+function computeSignature (data) {
+  data = JSON.stringify(data);
+  return `sha1=${crypto.createHmac('sha1', WEBHOOK_SECRET).update(data).digest('hex')}`;
+}
+module.exports.computeSignature= computeSignature;
 
 /**
  * Bump A-Frame master build on every commit.
