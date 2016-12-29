@@ -34,6 +34,8 @@ repositoryCloned.then(() => {
   app.post('/postreceive', function (req, res) {
     var data = req.body;
 
+    console.log(`Received message for ${data.repository.full_name}.`);
+
     if (data.repository.full_name === 'aframevr/aframe') {
       bumpDist(data);
     }
@@ -55,6 +57,7 @@ repositoryCloned.then(() => {
 
     if (!hasCodeChanges) { return; }
 
+    console.log('Bumping aframevr/aframe dist...');
     exec([
       'git pull --rebase origin master',
       'npm install',
