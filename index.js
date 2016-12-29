@@ -73,8 +73,8 @@ function bumpAframeDist (data) {
     console.log(`Bumping ${REPO} dist...`);
     async.series([
       execAframeCommand('git pull --rebase origin master'),
-      execAframeCommand('npm install'),
-      execAframeCommand('npm install --only=dev'),
+      execAframeCommand('npm install --max-old-space-size=200'),
+      execAframeCommand('npm install --only=dev --max-old-space-size=200'),
       execAframeCommand('npm run dist'),
       execAframeCommand('git add dist'),
       execAframeCommand('git commit -m "bump dist"'),
