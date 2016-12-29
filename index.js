@@ -76,11 +76,11 @@ function bumpAframeDist (data) {
       execAframeCommand('npm run dist'),
       execAframeCommand('git commit -m "bump dist"'),
       execAframeCommand(`git push https://${TOKEN}@github.com/${REPO}.git master`)
-    ]);
-  }, function (err) {
-    if (err) { console.error(err); }
-    resolve(true);
-  })
+    ], function asyncSeriesDone (err) {
+      if (err) { console.error(err); }
+      resolve(true);
+    });
+  });
 }
 module.exports.bumpAframeDist = bumpAframeDist;
 
