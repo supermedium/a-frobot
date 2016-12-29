@@ -57,19 +57,6 @@ function initApp () {
 function bumpAframeDist (data) {
   if (!hasAframeCodeChanges(data)) { return Promise.resolve(false); }
 
-  /**
-   * Helper for async.js.
-   */
-  function execAframeCommand (command) {
-    return callback => {
-      console.log(`Running ${command}...`);
-      childProcess.exec(command, {cwd: 'aframe', stdio: 'inherit'}, (err, stdout)  => {
-        if (err) { console.error(err); }
-        callback();
-      });
-    };
-  }
-
   return new Promise(resolve => {
     console.log(`Bumping ${REPO} dist...`);
     async.series([
@@ -88,6 +75,20 @@ function bumpAframeDist (data) {
   });
 }
 module.exports.bumpAframeDist = bumpAframeDist;
+
+/**
+ * Helper for async.js.
+ */
+function execAframeCommand (command) {
+  return callback => {
+    console.log(`Running ${command}...`);
+    childProcess.exec(command, {cwd: 'aframe', stdio: 'inherit'}, (err, stdout)  => {
+      if (err) { console.error(err); }
+      callback();
+    });
+  };
+}
+module.exports.execAframeCommand = execAframeCommand;
 
 /**
  * Check if A-Frame commit has actual code changes.

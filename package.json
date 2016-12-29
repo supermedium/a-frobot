@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --harmony --harmony-proxies tests"
+    "test": "GITHUB_TOKEN=abc mocha --harmony --harmony-proxies tests"
   },
   "repository": {
     "type": "git",
