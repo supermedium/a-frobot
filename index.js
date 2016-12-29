@@ -22,6 +22,8 @@ var repositoryCloned = new Promise((resolve, reject) => {
 // execSync('git config user.email aframebot@gmail.com');
 
 repositoryCloned.then(() => {
+  spawn('ls', {stdio: 'inherit'});
+
   // Set up Express.
   app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.json());
