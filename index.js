@@ -1,3 +1,4 @@
+var async = require('async');
 var bodyParser = require('body-parser');
 var childProcess = require('child_process');
 var express = require('express');
@@ -55,19 +56,31 @@ function initApp () {
 function bumpAframeDist (data) {
   if (!hasAframeCodeChanges(data)) { return Promise.resolve(false); }
 
-  console.log(`Bumping ${REPO} dist...`);
+  /**
+   * Helper for async.js.
+   */
+  function execAframeCommand (command) {
+    return callback => {
+      childProcess.exec(command, {cwd: 'aframe', stdio: 'inherit'}, (err, stdout)  => {
+        if (err) { console.error(err); }
+        callback();
+      });
+    };
+  }
+
   return new Promise(resolve => {
-    childProcess.exec([
-      'git pull --rebase origin master',
-      'npm install',
-      'npm run dist',
-      'git commit -m "bump dist"',
-      `git push https://${TOKEN}@github.com/${REPO}.git master`
-    ].join(' && '), {cwd: 'aframe', stdio: 'inherit'}, (err, stdout, stderr) => {
-      if (err) { console.log(err); }
-      resolve(true);
-    });
-  }).catch(console.error);
+    console.log(`Bumping ${REPO} dist...`);
+    async.series([
+      execAframeCommand('git pull --rebase origin master'),
+      execAframeCommand('npm install'),
+      execAframeCommand('npm run dist'),
+      execAframeCommand('git commit -m "bump dist"'),
+      execAframeCommand(`git push https://${TOKEN}@github.com/${REPO}.git master`)
+    ]);
+  }, function (err) {
+    if (err) { console.error(err); }
+    resolve(true);
+  })
 }
 module.exports.bumpAframeDist = bumpAframeDist;
 

@@ -11,7 +11,7 @@ describe('hasAframeCodeChanges', () => {
     assert.ok(AFRO.hasAframeCodeChanges(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON));
   });
 
-  it.only('detects when commit does not have code changes', () => {
+  it('detects when commit does not have code changes', () => {
     assert.ok(!AFRO.hasAframeCodeChanges(FIXTURE_AFRAME_COMMIT_DOCS));
   });
 });
