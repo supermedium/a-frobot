@@ -13,12 +13,12 @@ describe('postHandler', () => {
     data.repository.full_name = 'foo/bar';
     let res = AFRO.postHandler(data,
                                AFRO.computeSignature(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON));
-    assert.ok(res);
+    assert.equal(res, 200);
   });
 
   it('does not run with invalid token', () => {
     let res = AFRO.postHandler(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON, 'foo');
-    assert.ok(!res);
+    assert.equal(res, 403);
   });
 });
 

@@ -39,8 +39,7 @@ function initApp () {
 
   // Webhook handler.
   app.post('/postreceive', function handler (req, res) {
-    postHandler(req.body, req.headers['x-hub-signature']);
-    res.send(data);
+    res.send(postHandler(req.body, req.headers['x-hub-signature']));
   })
 
   // Express listen.
@@ -56,14 +55,14 @@ function postHandler (data, githubSignature) {
   // Validate payload.
   if (!bufferEq(new Buffer(computeSignature(data)), new Buffer(githubSignature))) {
     console.log('Received invalid GitHub webhook signature. Check SECRET_TOKEN.');
-    return false;
+    return 403;
   }
 
   console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
   if (data.repository.full_name === REPO) {
     bumpAframeDist(data);
   }
-  return true;
+  return 200;
 }
 module.exports.postHandler = postHandler;
 
