@@ -7,6 +7,7 @@ const fs = require('fs');
 
 const config = require('./config');
 const bumpAframeDist = require('./lib/bumpAframeDist').bumpAframeDist;
+const bumpAframeDocs = require('./lib/bumpAframeDocs').bumpAframeDocs;
 const bumpAframeRegistry = require('./lib/bumpAframeRegistry').bumpAframeRegistry;
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -40,6 +41,26 @@ new Promise((resolve, reject) => {
       childProcess.spawn('git', [
         'clone',
         `https://${GITHUB_TOKEN}@github.com/${config.repoRegistry}.git`
+      ], {stdio: 'inherit'}).on('close', resolve);
+    }));
+  }
+
+  // A-Frame Site repository.
+  if (!fs.existsSync('aframe-site')) {
+    clonedRepositories.push(new Promise(resolve => {
+      childProcess.spawn('git', [
+        'clone',
+        `https://${GITHUB_TOKEN}@github.com/${config.repoSite}.git`
+      ], {stdio: 'inherit'}).on('close', resolve);
+    }));
+  }
+
+  // A-Frame Site Github Pages repository.
+  if (!fs.existsSync('aframevr.github.io')) {
+    clonedRepositories.push(new Promise(resolve => {
+      childProcess.spawn('git', [
+        'clone',
+        `https://${GITHUB_TOKEN}@github.com/${config.repoSitePages}.git`
       ], {stdio: 'inherit'}).on('close', resolve);
     }));
   }
@@ -90,6 +111,7 @@ function postHandler (data, githubSignature) {
 
     if (data.repository.full_name === config.repo) {
       bumpAframeDist(data);
+      bumpAframeDocs(data);
     }
 
     if (data.repository.full_name === config.repoRegistry) {
