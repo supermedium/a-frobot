@@ -31,6 +31,13 @@ as an environment variable called `SECRET_TOKEN`:
 heroku config:set SECRET_TOKEN=def456
 ```
 
+### Repository Setup
+
+- aframevr/aframe - Webhook + Write Access
+- aframevr/aframe-registry - Webhook + Write Access
+- aframevr/aframe-site
+- aframevr/aframevr.github.io - Write Access
+
 ## Setting up a Staging Environment
 
 ```
