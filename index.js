@@ -13,70 +13,20 @@ const bumpAframeRegistry = require('./lib/bumpAframeRegistry').bumpAframeRegistr
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
-console.log('A-frobot config:', JSON.stringify(config));
-
 // Git config.
 if (process.env.AFROBOT_ENV !== 'test') {
   childProcess.execSync(`git config --global user.email ${config.userEmail}`);
   childProcess.execSync(`git config --global user.name ${config.userName}`);
 }
 
-// Clone repositories.
-new Promise((resolve, reject) => {
-  let clonedRepositories = [];
-
-  if (process.env.AFROBOT_ENV === 'test') { return resolve(); }
-
-  // A-Frame repository.
-  if (!fs.existsSync('aframe')) {
-    clonedRepositories.push(new Promise(resolve => {
-      childProcess.spawn('git', [
-        'clone',
-        `https://${GITHUB_TOKEN}@github.com/${config.repo}.git`
-      ], {stdio: 'inherit'}).on('close', resolve);
-    }));
-  }
-
-  // A-Frame Registry repository.
-  if (!fs.existsSync('aframe-registry')) {
-    clonedRepositories.push(new Promise(resolve => {
-      childProcess.spawn('git', [
-        'clone',
-        `https://${GITHUB_TOKEN}@github.com/${config.repoRegistry}.git`
-      ], {stdio: 'inherit'}).on('close', resolve);
-    }));
-  }
-
-  // A-Frame Site repository.
-  if (!fs.existsSync('aframe-site')) {
-    clonedRepositories.push(new Promise(resolve => {
-      childProcess.spawn('git', [
-        'clone',
-        `https://${GITHUB_TOKEN}@github.com/${config.repoSite}.git`
-      ], {stdio: 'inherit'}).on('close', resolve);
-    }));
-  }
-
-  // A-Frame Site Github Pages repository.
-  if (!fs.existsSync('aframevr.github.io')) {
-    clonedRepositories.push(new Promise(resolve => {
-      childProcess.spawn('git', [
-        'clone',
-        `https://${GITHUB_TOKEN}@github.com/${config.repoSitePages}.git`
-      ], {stdio: 'inherit'}).on('close', resolve);
-    }));
-  }
-
-  Promise.all(clonedRepositories).then(() => {
-    console.log('Repositories cloned.');
-    resolve();
-  });
-}).then(initExpressApp);
+initExpressApp();
 
 /**
  * Express app.
  */
 function initExpressApp () {
+  console.log('A-frobot config:', JSON.stringify(config));
+
   const app = express();
   app.set('port', (process.env.PORT || 5000));
   app.use(bodyParser.json());
@@ -91,6 +41,7 @@ function initExpressApp () {
 
   // Express listen.
   app.listen(app.get('port'), function () {
+    cloneRepositories();
     console.log('Node app is running on port', app.get('port'));
   });
 }
@@ -128,6 +79,45 @@ function postHandler (data, githubSignature) {
   return 200;
 }
 module.exports.postHandler = postHandler;
+
+/**
+ * Clone repositories.
+ */
+function cloneRepositories () {
+  if (process.env.AFROBOT_ENV === 'test') { return; }
+
+  // A-Frame repository.
+  if (!fs.existsSync('aframe')) {
+    childProcess.spawn('git', [
+      'clone',
+      `https://${GITHUB_TOKEN}@github.com/${config.repo}.git`
+    ], {stdio: 'inherit'}).on('close', resolve);
+  }
+
+  // A-Frame Registry repository.
+  if (!fs.existsSync('aframe-registry')) {
+    childProcess.spawn('git', [
+      'clone',
+      `https://${GITHUB_TOKEN}@github.com/${config.repoRegistry}.git`
+    ], {stdio: 'inherit'}).on('close', resolve);
+  }
+
+  // A-Frame Site repository.
+  if (!fs.existsSync('aframe-site')) {
+    childProcess.spawn('git', [
+      'clone',
+      `https://${GITHUB_TOKEN}@github.com/${config.repoSite}.git`
+    ], {stdio: 'inherit'}).on('close', resolve);
+  }
+
+  // A-Frame Site Github Pages repository.
+  if (!fs.existsSync('aframevr.github.io')) {
+    childProcess.spawn('git', [
+      'clone',
+      `https://${GITHUB_TOKEN}@github.com/${config.repoSitePages}.git`
+    ], {stdio: 'inherit'}).on('close', resolve);
+  }
+}
 
 /**
  * Compute signature using secret token for validation.
