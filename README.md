@@ -44,6 +44,7 @@ git push staging master
 ## Helpful Commands
 
 ```sh
+heroku logs # Console logs.
 heroku ps:scale web=1  # View running processes.
 heroku open  # Open in browser.
 ```
