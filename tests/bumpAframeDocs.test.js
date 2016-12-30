@@ -8,6 +8,7 @@ var BumpAframeDocs = require('../lib/bumpAframeDocs');
 
 var FIXTURE_AFRAME_COMMIT = require('./fixtures/aframeCommit');
 var FIXTURE_AFRAME_COMMIT_DOCS = require('./fixtures/aframeCommitDocs');
+var FIXTURE_AFRAME_COMMIT_DOCS_BRANCH = require('./fixtures/aframeCommitDocsBranch');
 
 describe('bumpAframeDocs', () => {
   var execSpy;
@@ -43,8 +44,12 @@ describe('bumpAframeDocs', () => {
 });
 
 describe('shouldBumpDocs', () => {
-  it('should bump when commit has docs changes', () => {
+  it('should bump when commit has docs changes on master', () => {
     assert.ok(BumpAframeDocs.shouldBumpDocs(FIXTURE_AFRAME_COMMIT_DOCS));
+  });
+
+  it('should bump when commit has docs changes on docs branc', () => {
+    assert.ok(BumpAframeDocs.shouldBumpDocs(FIXTURE_AFRAME_COMMIT_DOCS_BRANCH));
   });
 
   it('should not bump when commit does not have docs changes', () => {
