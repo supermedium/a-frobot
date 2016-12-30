@@ -7,9 +7,9 @@ const fs = require('fs');
 
 const config = require('./config');
 const bumpAframeDist = require('./lib/bumpAframeDist').bumpAframeDist;
+const bumpAframeRegistry = require('./lib/bumpAframeRegistry').bumpAframeRegistry;
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO = config.repo;
 const WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
 // Git config.
@@ -18,13 +18,33 @@ if (process.env.NODE_ENV !== 'test') {
   childProcess.execSync(`git config --global user.name ${config.userName}`);
 }
 
-// Clone repository.
+// Clone repositories.
 new Promise((resolve, reject) => {
-  if (fs.existsSync('aframe') || process.env.NODE_ENV === 'test') { return resolve(); }
+  let clonedRepositories = [];
 
-  childProcess.spawn('git', ['clone', `https://${GITHUB_TOKEN}@github.com/${REPO}.git`], {
-    stdio: 'inherit'
-  }).on('close', resolve);
+  if (process.env.NODE_ENV === 'test') { return resolve(); }
+
+  // A-Frame repository.
+  if (!fs.existsSync('aframe')) {
+    clonedRepositories.push(new Promise(resolve => {
+      childProcess.spawn('git', [
+        'clone',
+        `https://${GITHUB_TOKEN}@github.com/${config.repo}.git`
+      ], {stdio: 'inherit'}).on('close', resolve);
+    }));
+  }
+
+  // A-Frame Registry repository.
+  if (!fs.existsSync('aframe-registry')) {
+    clonedRepositories.push(new Promise(resolve => {
+      childProcess.spawn('git', [
+        'clone',
+        `https://${GITHUB_TOKEN}@github.com/${config.repoRegistry}.git`
+      ], {stdio: 'inherit'}).on('close', resolve);
+    }));
+  }
+
+  Promise.all(clonedRepositories).then(resolve);
 }).then(initExpressApp);
 
 /**
@@ -59,8 +79,14 @@ function postHandler (data, githubSignature) {
     return 403;
   }
 
+  // Check that the commit is not from the bot.
+  if (data.head_commit.committer.email === config.userEmail ||
+      data.head_commit.committer.username === config.userName) {
+    return 204;
+  }
+
   console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
-  if (data.repository.full_name === REPO && data.commits) {
+  if (data.repository.full_name === config.repo && data.commits) {
     bumpAframeDist(data);
   }
   return 200;

@@ -2,6 +2,7 @@ const stagingConfig = require('./config.staging');
 
 let config = {
   repo: 'aframevr/aframe',
+  repoRegistry: 'aframevr/aframe-registry',
   userEmail: 'aframebot@gmail.com',
   userName: 'a-frobot'
 };
