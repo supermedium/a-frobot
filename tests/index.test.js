@@ -3,9 +3,16 @@ var assert = require('assert');
 var childProcess = require('child_process');
 
 var AFRO = require('../index');
+var config = require('../config');
 
 var FIXTURE_AFRAME_COMMIT_BOT = require('./fixtures/aframeCommitBot');
 var FIXTURE_AFRAME_COMMIT_PACKAGE_JSON = require('./fixtures/aframeCommitPackageJson');
+
+describe('config', () => {
+  it('is a staging config', () => {
+    assert.equal(config.repo, 'ngokevin/aframe');
+  });
+});
 
 describe('postHandler', () => {
   it('runs with valid token', () => {

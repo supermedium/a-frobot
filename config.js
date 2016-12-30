@@ -9,7 +9,7 @@ let config = {
   userName: 'a-frobot'
 };
 
-if (process.env.AFROBOT_ENV === 'staging') {
+if (process.env.AFROBOT_ENV === 'staging' || process.env.AFROBOT_ENV === 'test') {
   config = Object.assign(config, stagingConfig);
 }
 
