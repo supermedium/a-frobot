@@ -91,7 +91,9 @@ function cloneRepositories () {
     childProcess.spawn('git', [
       'clone',
       `https://${GITHUB_TOKEN}@github.com/${config.repo}.git`
-    ], {stdio: 'inherit'}).on('close', resolve);
+    ], {stdio: 'inherit'}).on('close', () => {
+      console.log('aframe cloned');
+    });
   }
 
   // A-Frame Registry repository.
@@ -99,7 +101,9 @@ function cloneRepositories () {
     childProcess.spawn('git', [
       'clone',
       `https://${GITHUB_TOKEN}@github.com/${config.repoRegistry}.git`
-    ], {stdio: 'inherit'}).on('close', resolve);
+    ], {stdio: 'inherit'}).on('close', () => {
+      console.log('registry cloned');
+    });
   }
 
   // A-Frame Site repository.
@@ -107,7 +111,9 @@ function cloneRepositories () {
     childProcess.spawn('git', [
       'clone',
       `https://${GITHUB_TOKEN}@github.com/${config.repoSite}.git`
-    ], {stdio: 'inherit'}).on('close', resolve);
+    ], {stdio: 'inherit'}).on('close', () => {
+      console.log('site cloned');
+    });
   }
 
   // A-Frame Site Github Pages repository.
@@ -115,7 +121,9 @@ function cloneRepositories () {
     childProcess.spawn('git', [
       'clone',
       `https://${GITHUB_TOKEN}@github.com/${config.repoSitePages}.git`
-    ], {stdio: 'inherit'}).on('close', resolve);
+    ], {stdio: 'inherit'}).on('close', () => {
+      console.log('site pages cloned');
+    });
   }
 }
 
