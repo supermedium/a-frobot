@@ -106,6 +106,7 @@ function postHandler (data, githubSignature) {
     // Check that the commit is not from the bot.
     if (data.head_commit.committer.email === config.userEmail ||
         data.head_commit.committer.username === config.userName) {
+      console.log('Commit is from a-frobot, returning.');
       return 204;
     }
 
