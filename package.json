@@ -4,6 +4,7 @@
   "description": "A-Frame GitHub bot.",
   "main": "index.js",
   "scripts": {
+    "lint": "semistandard -v | snazzy",
     "start": "node index.js",
     "test": "NODE_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
   },
@@ -29,7 +30,9 @@
   },
   "devDependencies": {
     "mocha": "^3.2.0",
-    "sinon": "^1.17.6"
+    "semistandard": "^9.2.1",
+    "sinon": "^1.17.6",
+    "snazzy": "^5.0.0"
   },
   "engines": {
     "node": "^6.9.2"

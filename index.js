@@ -37,17 +37,17 @@ function initExpressApp () {
   app.use(bodyParser.json());
   app.get('/', function (req, res) {
     res.send('AFRO');
-  })
+  });
 
   // Webhook handler.
   app.post('/postreceive', function handler (req, res) {
     res.send(postHandler(req.body, req.headers['x-hub-signature']));
-  })
+  });
 
   // Express listen.
   app.listen(app.get('port'), function () {
     console.log('Node app is running on port', app.get('port'));
-  })
+  });
 }
 
 /**
@@ -75,7 +75,7 @@ function computeSignature (data) {
   data = JSON.stringify(data);
   return `sha1=${crypto.createHmac('sha1', WEBHOOK_SECRET).update(data).digest('hex')}`;
 }
-module.exports.computeSignature= computeSignature;
+module.exports.computeSignature = computeSignature;
 
 /**
  * Bump A-Frame master build on every commit.
@@ -108,7 +108,7 @@ module.exports.bumpAframeDist = bumpAframeDist;
 function execAframeCommand (command) {
   return callback => {
     console.log(`Running ${command}...`);
-    childProcess.exec(command, {cwd: 'aframe', stdio: 'inherit'}, (err, stdout)  => {
+    childProcess.exec(command, {cwd: 'aframe', stdio: 'inherit'}, (err, stdout) => {
       if (err) { console.error(err); }
       callback();
     });
@@ -121,7 +121,7 @@ module.exports.execAframeCommand = execAframeCommand;
  */
 function shouldBumpAframeDist (data) {
   function commitHasCodeChanges (commit) {
-     return commit.modified.filter(function (file) {
+    return commit.modified.filter(function (file) {
       return file.indexOf('src/') === 0 || file.indexOf('vendor/') === 0 ||
              file === 'package.json';
     }).length !== 0;

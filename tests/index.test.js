@@ -1,3 +1,4 @@
+/* global afterEach, beforeEach, describe, it */
 var assert = require('assert');
 var childProcess = require('child_process');
 var sinon = require('sinon');
@@ -43,7 +44,7 @@ describe('bumpAframeDist', () => {
       assert.ok(result);
       assert.ok(execSpy.getCalls().length > 1);
       done();
-    });;
+    });
   });
 });
 
