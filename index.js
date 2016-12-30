@@ -13,6 +13,8 @@ const bumpAframeRegistry = require('./lib/bumpAframeRegistry').bumpAframeRegistr
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
+console.log('A-frobot config:', JSON.stringify(config));
+
 // Git config.
 if (process.env.AFROBOT_ENV !== 'test') {
   childProcess.execSync(`git config --global user.email ${config.userEmail}`);
@@ -65,7 +67,10 @@ new Promise((resolve, reject) => {
     }));
   }
 
-  Promise.all(clonedRepositories).then(resolve);
+  Promise.all(clonedRepositories).then(() => {
+    console.log('Repositories cloned.');
+    resolve();
+  });
 }).then(initExpressApp);
 
 /**
