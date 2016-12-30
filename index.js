@@ -79,20 +79,24 @@ function postHandler (data, githubSignature) {
     return 403;
   }
 
-  // Check that the commit is not from the bot.
-  if (data.commits &&
-      data.head_commit.committer.email === config.userEmail ||
-      data.head_commit.committer.username === config.userName) {
-    return 204;
+  if (data.commits) {
+    console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
+
+    // Check that the commit is not from the bot.
+    if (data.head_commit.committer.email === config.userEmail ||
+        data.head_commit.committer.username === config.userName) {
+      return 204;
+    }
+
+    if (data.repository.full_name === config.repo) {
+      bumpAframeDist(data);
+    }
+
+    if (data.repository.full_name === config.repoRegistry) {
+      bumpAframeRegistry(data);
+    }
   }
 
-  console.log(`Received commit ${data.after} for ${data.repository.full_name}.`);
-  if (data.repository.full_name === config.repo && data.commits) {
-    bumpAframeDist(data);
-  }
-  if (data.repository.full_name === config.repoRegistry && data.commits) {
-    bumpAframeRegistry(data);
-  }
   return 200;
 }
 module.exports.postHandler = postHandler;
