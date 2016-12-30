@@ -6,6 +6,12 @@ A-Frame GitHub bot.
 
 Deployed on Heroku.
 
+## Actions
+
+- When the A-Frame code or package.json is updated, bump the A-Frame master builds.
+- When the A-Frame documentation is updated, deploy the documentation on the A-Frame site.
+- When the A-Frame Registry is updated, bump the A-Frame Registry builds and site.
+
 ## Setup
 
 Install Heroku.
