@@ -47,6 +47,16 @@ describe('bumpAframeDist', () => {
       done();
     });
   });
+
+  it('calls git push', (done) => {
+    BumpAframeDist.bumpAframeDist(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON).then(result => {
+      const calls = execSpy.getCalls();
+      const lastCall = calls[calls.length - 1];
+      assert.equal(lastCall.args[0],
+                   'git push https://abc@github.com/ngokevin/aframe.git master');
+      done();
+    });
+  });
 });
 
 describe('shouldBumpAframeDist', () => {
