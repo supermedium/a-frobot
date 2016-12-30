@@ -80,7 +80,8 @@ function postHandler (data, githubSignature) {
   }
 
   // Check that the commit is not from the bot.
-  if (data.head_commit.committer.email === config.userEmail ||
+  if (data.commits &&
+      data.head_commit.committer.email === config.userEmail ||
       data.head_commit.committer.username === config.userName) {
     return 204;
   }
