@@ -89,6 +89,9 @@ function postHandler (data, githubSignature) {
   if (data.repository.full_name === config.repo && data.commits) {
     bumpAframeDist(data);
   }
+  if (data.repository.full_name === config.repoRegistry && data.commits) {
+    bumpAframeRegistry(data);
+  }
   return 200;
 }
 module.exports.postHandler = postHandler;
