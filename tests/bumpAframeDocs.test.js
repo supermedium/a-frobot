@@ -38,6 +38,8 @@ describe('bumpAframeDocs', () => {
       const lastCall = calls[calls.length - 1];
       assert.equal(lastCall.args[0],
                    'git push https://abc@github.com/ngokevin/aframevr.github.io.git master');
+      assert.equal(lastCall.args[1].cwd,
+                   'aframevr.github.io');
       done();
     });
   });
@@ -48,7 +50,7 @@ describe('shouldBumpDocs', () => {
     assert.ok(BumpAframeDocs.shouldBumpDocs(FIXTURE_AFRAME_COMMIT_DOCS));
   });
 
-  it('should bump when commit has docs changes on docs branc', () => {
+  it('should bump when commit has docs changes on docs branch', () => {
     assert.ok(BumpAframeDocs.shouldBumpDocs(FIXTURE_AFRAME_COMMIT_DOCS_BRANCH));
   });
 
