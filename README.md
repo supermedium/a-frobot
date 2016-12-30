@@ -44,7 +44,7 @@ heroku config:set SECRET_TOKEN=def456
 heroku create --remote staging
 heroku config:set GITHUB_TOKEN=abc123 --remote staging
 heroku config:set SECRET_TOKEN=def456 --remote staging
-heroku config:set NODE_ENV=staging --remote staging
+heroku config:set AFROBOT_ENV=staging --remote staging
 git push staging master
 ```
 

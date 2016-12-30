@@ -7,7 +7,7 @@
     "deploy": "git push origin master && git push staging master && git push heroku master",
     "lint": "semistandard -v | snazzy",
     "start": "node index.js",
-    "test": "NODE_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
+    "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
   },
   "repository": {
     "type": "git",

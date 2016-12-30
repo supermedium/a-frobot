@@ -14,7 +14,7 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
 // Git config.
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.AFROBOT_ENV !== 'test') {
   childProcess.execSync(`git config --global user.email ${config.userEmail}`);
   childProcess.execSync(`git config --global user.name ${config.userName}`);
 }
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'test') {
 new Promise((resolve, reject) => {
   let clonedRepositories = [];
 
-  if (process.env.NODE_ENV === 'test') { return resolve(); }
+  if (process.env.AFROBOT_ENV === 'test') { return resolve(); }
 
   // A-Frame repository.
   if (!fs.existsSync('aframe')) {
