@@ -13,8 +13,6 @@ const bumpAframeRegistry = require('./lib/bumpAframeRegistry').bumpAframeRegistr
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const WEBHOOK_SECRET = process.env.SECRET_TOKEN;
 
-childProcess.execSync('rm -rf aframe-site');
-
 // Git config.
 if (process.env.AFROBOT_ENV !== 'test') {
   childProcess.execSync(`git config --global user.email ${config.userEmail}`);
