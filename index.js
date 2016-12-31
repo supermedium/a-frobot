@@ -86,6 +86,7 @@ module.exports.postHandler = postHandler;
 function cloneRepositories () {
   if (process.env.AFROBOT_ENV === 'test') { return; }
 
+  /*
   // A-Frame repository.
   if (!fs.existsSync('aframe')) {
     childProcess.spawn('git', [
@@ -105,6 +106,7 @@ function cloneRepositories () {
       console.log('registry cloned');
     });
   }
+  */
 
   // A-Frame Site repository.
   if (!fs.existsSync('aframe-site')) {
