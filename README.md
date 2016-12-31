@@ -57,7 +57,8 @@ git push staging master
 ## Helpful Commands
 
 ```sh
-heroku logs --tail # Real-time console logs.
+heroku logs --tail  # Real-time console logs.
 heroku ps:scale web=1  # View running processes.
 heroku open  # Open in browser.
+heroku labs:enable log-runtime-metrics  # View resource metrics.
 ```
