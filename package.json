@@ -6,7 +6,7 @@
   "scripts": {
     "deploy": "git push origin master && git push staging master && git push heroku master",
     "lint": "semistandard -v | snazzy",
-    "start": "node index.js",
+    "start": "heroku-node-settings index.js",
     "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
   },
   "repository": {
@@ -27,7 +27,8 @@
     "async": "^2.1.4",
     "body-parser": "^1.15.2",
     "buffer-equal-constant-time": "^1.0.1",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "heroku-node-settings": "^1.0.2"
   },
   "devDependencies": {
     "mocha": "^3.2.0",
