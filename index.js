@@ -19,6 +19,9 @@ if (process.env.AFROBOT_ENV !== 'test') {
   childProcess.execSync(`git config --global user.name ${config.userName}`);
 }
 
+// Limit memory usage.
+childProcess.execSync('npm config set jobs 1');
+
 initExpressApp();
 
 /**
