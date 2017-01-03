@@ -1,3 +1,4 @@
+const async = require('async');
 const bufferEq = require('buffer-equal-constant-time');
 const bodyParser = require('body-parser');
 const childProcess = require('child_process');
@@ -89,46 +90,23 @@ module.exports.postHandler = postHandler;
 function cloneRepositories () {
   if (process.env.AFROBOT_ENV === 'test') { return; }
 
-  /*
-  // A-Frame repository.
-  if (!fs.existsSync('aframe')) {
-    childProcess.spawn('git', [
-      'clone',
-      `https://${GITHUB_TOKEN}@github.com/${config.repo}.git`
-    ], {stdio: 'inherit'}).on('close', () => {
-      console.log('aframe cloned');
-    });
-  }
+  async.series([
+    clone('aframe', config.repo),
+    clone('aframe-registry', config.repoRegistry),
+    clone('aframe-site', config.repoSite),
+    clone('aframevr.github.io', config.repoSitePages)
+  ]);
 
-  // A-Frame Registry repository.
-  if (!fs.existsSync('aframe-registry')) {
-    childProcess.spawn('git', [
-      'clone',
-      `https://${GITHUB_TOKEN}@github.com/${config.repoRegistry}.git`
-    ], {stdio: 'inherit'}).on('close', () => {
-      console.log('registry cloned');
-    });
-  }
-  */
-
-  // A-Frame Site repository.
-  if (!fs.existsSync('aframe-site')) {
-    childProcess.spawn('git', [
-      'clone',
-      `https://${GITHUB_TOKEN}@github.com/${config.repoSite}.git`
-    ], {stdio: 'inherit'}).on('close', () => {
-      console.log('site cloned');
-    });
-  }
-
-  // A-Frame Site Github Pages repository.
-  if (!fs.existsSync('aframevr.github.io')) {
-    childProcess.spawn('git', [
-      'clone',
-      `https://${GITHUB_TOKEN}@github.com/${config.repoSitePages}.git`
-    ], {stdio: 'inherit'}).on('close', () => {
-      console.log('site pages cloned');
-    });
+  function clone (dir, repo) {
+    return cb => {
+      childProcess.spawn('git', ['clone', `https://${GITHUB_TOKEN}@github.com/${repo}.git`], {
+        stdio: 'inherit'
+      }).on('close', function () {
+        console.log(`${dir} cloned`);
+        this.kill('SIGINT')
+        cb();
+      });
+    };
   }
 }
 
