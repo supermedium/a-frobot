@@ -95,7 +95,9 @@ function cloneRepositories () {
     clone('aframe-registry', config.repoRegistry),
     clone('aframe-site', config.repoSite),
     clone('aframevr.github.io', config.repoSitePages)
-  ]);
+  ], function () {
+    console.log('All repositories cloned.');
+  });
 
   function clone (dir, repo) {
     return cb => {
