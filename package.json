@@ -8,7 +8,7 @@
     "dev": "AFROBOT_ENV=test node index.js",
     "lint": "semistandard -v | snazzy",
     "postinstall": "cp tokens.js.dist tokens.js",
-    "start": "forever start index.js",
+    "start": "NODE_ENV=production AFROBOT_ENV=production forever start index.js",
     "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
   },
   "repository": {
