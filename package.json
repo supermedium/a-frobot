@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "deploy": "git push origin master && git push staging master && git push heroku master",
+    "dev": "node index.js",
     "lint": "semistandard -v | snazzy",
     "postinstall": "cp tokens.js.dist tokens.js",
-    "start": "heroku-node-settings index.js",
+    "start": "forever start index.js",
     "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "heroku-node-settings": "^1.0.2"
   },
   "devDependencies": {
+    "forever": "^0.15.3",
     "mocha": "^3.2.0",
     "semistandard": "^9.2.1",
     "sinon": "^1.17.6",
