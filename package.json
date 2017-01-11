@@ -9,6 +9,7 @@
     "lint": "semistandard -v | snazzy",
     "start": "NODE_ENV=production AFROBOT_ENV=production forever start index.js",
     "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
+    "update": "git pull --rebase origin master && forever restart 0",
   },
   "repository": {
     "type": "git",
