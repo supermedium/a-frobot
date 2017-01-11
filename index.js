@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const express = require('express');
 const fs = require('fs');
 
+require('./tokens');
 const config = require('./config');
 const bumpAframeDist = require('./lib/bumpAframeDist').bumpAframeDist;
 const bumpAframeDocs = require('./lib/bumpAframeDocs').bumpAframeDocs;

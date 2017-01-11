@@ -6,6 +6,7 @@
   "scripts": {
     "deploy": "git push origin master && git push staging master && git push heroku master",
     "lint": "semistandard -v | snazzy",
+    "postinstall": "cp tokens.js.dist tokens.js",
     "start": "heroku-node-settings index.js",
     "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
   },

@@ -1,0 +1,17 @@
+// Modify me.
+let config = {
+  staging: {
+    GITHUB_TOKEN: '',
+    SECRET_TOKEN: ''
+  },
+  production: {
+    GITHUB_TOKEN: '',
+    SECRET_TOKEN: ''
+  }
+};
+
+// Set environment variables.
+config = config[process.env.AFROBOT_ENV] || config.staging;
+Object.keys(config).forEach(function (key) {
+  process.env[key] = process.env[key] || config[key];
+});

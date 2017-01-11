@@ -12,7 +12,17 @@ Deployed on Heroku.
 - When the A-Frame documentation is updated, deploy the documentation on the A-Frame site.
 - When the A-Frame Registry is updated, bump the A-Frame Registry builds and site.
 
-## Setup
+## AWS Setup
+
+Open inbound port 80.
+
+```sh
+sudo apt-get install git node npm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+bash && nvm install v6
+```
+
+## Heroku Setup
 
 Install Heroku.
 

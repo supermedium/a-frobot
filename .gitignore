@@ -40,3 +40,4 @@ aframe/
 config.local.js
 .env
 *.sw[ponm]
+tokens.js
