@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deploy": "git push origin master && git push staging master && git push heroku master",
-    "dev": "node index.js",
+    "dev": "AFROBOT_ENV=test node index.js",
     "lint": "semistandard -v | snazzy",
     "postinstall": "cp tokens.js.dist tokens.js",
     "start": "forever start index.js",
