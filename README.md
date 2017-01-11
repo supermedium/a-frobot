@@ -33,7 +33,9 @@ pointing to `/postreceive`. Give the webhook a secret token. Put the webhook
 token in `tokens.js` as `SECRET_TOKEN`.
 
 ```sh
+npm install -g forever
 npm run start
+forever logs 0
 ```
 
 ## Repository Setup
