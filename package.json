@@ -8,7 +8,7 @@
     "dev": "AFROBOT_ENV=test node index.js",
     "lint": "semistandard -v | snazzy",
     "start": "NODE_ENV=production AFROBOT_ENV=production forever start index.js",
-    "startstaging": "NODE_ENV=production AFROBOT_ENV=staging PORT=6000 forever start index.js",
+    "startstaging": "NODE_ENV=production AFROBOT_ENV=staging forever start index.js",
     "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests",
     "update": "git pull --rebase origin master && npm install && forever restart 0",
     "updatestaging": "git pull --rebase origin master && npm install && forever restart 1"

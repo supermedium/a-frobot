@@ -17,7 +17,7 @@ Deployed on Heroku.
 ## AWS Setup
 
 Open inbound ports in the AWS Security Group on the console. A-Frobot defaults
-to port 5000 for production and port 6000 for staging.
+to port 5000 for production and port 5001 for staging.
 
 ```sh
 sudo apt-get install git node npm
