@@ -9,6 +9,7 @@ Deployed on Heroku.
 ## Actions
 
 - When the A-Frame code or package.json is updated, bump the A-Frame master builds.
+- When the A-Frame master builds are bumped: update README, package.json, and bump again.
 - When the A-Frame documentation is updated, deploy the documentation on the A-Frame site.
 - When the A-Frame Registry is updated, bump the A-Frame Registry builds and site.
 - When a contributor comments `@a-frobot docs-v0.4.0` on a commit, cherry-pick

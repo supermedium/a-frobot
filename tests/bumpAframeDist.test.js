@@ -1,15 +1,16 @@
 /* global afterEach, beforeEach, describe, it */
-var assert = require('assert');
-var childProcess = require('child_process');
-var sinon = require('sinon');
+const assert = require('assert');
+const childProcess = require('child_process');
+const fs = require('fs');
+const sinon = require('sinon');
 
-var AFRO = require('../index');
-var BumpAframeDist = require('../lib/bumpAframeDist');
+const AFRO = require('../index');
+const BumpAframeDist = require('../lib/bumpAframeDist');
 
-var FIXTURE_AFRAME_COMMIT_BOT = require('./fixtures/aframeCommitBot');
-var FIXTURE_AFRAME_COMMIT_DOCS = require('./fixtures/aframeCommitDocs');
-var FIXTURE_AFRAME_COMMIT_MULTI = require('./fixtures/aframeCommitMulti');
-var FIXTURE_AFRAME_COMMIT_PACKAGE_JSON = require('./fixtures/aframeCommitPackageJson');
+const FIXTURE_AFRAME_COMMIT_BOT = require('./fixtures/aframeCommitBot');
+const FIXTURE_AFRAME_COMMIT_DOCS = require('./fixtures/aframeCommitDocs');
+const FIXTURE_AFRAME_COMMIT_MULTI = require('./fixtures/aframeCommitMulti');
+const FIXTURE_AFRAME_COMMIT_PACKAGE_JSON = require('./fixtures/aframeCommitPackageJson');
 
 describe('bumpAframeDist', () => {
   var execSpy;
@@ -18,10 +19,15 @@ describe('bumpAframeDist', () => {
     execSpy = sinon.stub(childProcess, 'exec', function (command, opts, cb) {
       cb();
     });
+
+    sinon.stub(fs, 'readFile', function (arg, opt, cb) { cb(null, ''); });
+    sinon.stub(fs, 'writeFile', function (arg, data, cb) { cb(); });
   });
 
   afterEach(() => {
     childProcess.exec.restore();
+    fs.readFile.restore();
+    fs.writeFile.restore();
     execSpy = undefined;
   });
 
@@ -36,9 +42,11 @@ describe('bumpAframeDist', () => {
   it('calls git commit with compare URL', (done) => {
     BumpAframeDist.bumpAframeDist(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON).then(result => {
       const calls = execSpy.getCalls();
+      let checked = false;
       calls.forEach(call  => {
-        if (call.args[0].indexOf('git commit') === -1) { return; }
+        if (checked || call.args[0].indexOf('git commit') === -1) { return; }
         assert.ok(call.args[0].indexOf(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON.compare) !== -1);
+        checked = true;
       });
       done();
     });
@@ -66,5 +74,29 @@ describe('shouldBumpAframeDist', () => {
 
   it('should not bump when commit is doc changes', () => {
     assert.ok(!BumpAframeDist.shouldBumpAframeDist(FIXTURE_AFRAME_COMMIT_DOCS));
+  });
+});
+
+describe('replaceVersion', () => {
+  it('replaces raw version', () => {
+    const newStr = BumpAframeDist.replaceVersion(`\n"version": "0.4.0",\n`, 'abc123');
+    assert.equal(newStr, `\n"version": "0.4.0-#abc123",\n`);
+  });
+
+  it('replaces hashed version', () => {
+    const newStr = BumpAframeDist.replaceVersion(`\n"version": "0.4.0-#abc123",\n`, 'def456');
+    assert.equal(newStr, `\n"version": "0.4.0-#def456",\n`);
+  });
+});
+
+describe('replaceReadmeCdnUrl', () => {
+  it('replaces a URL', () => {
+    const newStr = BumpAframeDist.replaceReadmeCdnUrl(
+      `\n    <script src="https://rawgit.com/aframevr/aframe/abc123/dist/aframe-master.min.js">\n`,
+      'def456'
+    );
+    assert.equal(newStr,
+      `\n    <script src="https://rawgit.com/aframevr/aframe/def456/dist/aframe-master.min.js">\n`
+    );
   });
 });
