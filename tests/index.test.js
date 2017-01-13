@@ -7,6 +7,7 @@ var AFRO = require('../index');
 var config = require('../config');
 
 var FIXTURE_AFRAME_COMMIT_BOT = require('./fixtures/aframeCommitBot');
+var FIXTURE_AFRAME_COMMIT_COMMENT = require('./fixtures/aframeCommitComment');
 var FIXTURE_AFRAME_COMMIT_PACKAGE_JSON = require('./fixtures/aframeCommitPackageJson');
 
 describe('config', () => {
@@ -26,10 +27,14 @@ describe('postHandler', () => {
 
   it('adds jobs to queue', () => {
     let data = Object.assign({}, FIXTURE_AFRAME_COMMIT_PACKAGE_JSON);
-    let res = AFRO.postHandler(data,
-                               AFRO.computeSignature(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON));
+    AFRO.postHandler(data, AFRO.computeSignature(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON));
     assert.equal(AFRO.QUEUE.getPendingLength(), 1);
     assert.equal(AFRO.QUEUE.getQueueLength(), 1);
+  });
+
+  it('handles comment', () => {
+    let data = Object.assign({}, FIXTURE_AFRAME_COMMIT_COMMENT);
+    AFRO.postHandler(data, AFRO.computeSignature(FIXTURE_AFRAME_COMMIT_COMMENT));
   });
 
   it('runs with valid token', () => {
