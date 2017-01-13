@@ -5,6 +5,7 @@ const childProcess = require('child_process');
 const crypto = require('crypto');
 const express = require('express');
 const fs = require('fs');
+const PromiseQueue = require('promise-queue');
 
 require('./tokens');
 const config = require('./config');
@@ -14,6 +15,10 @@ const bumpAframeRegistry = require('./lib/bumpAframeRegistry').bumpAframeRegistr
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const WEBHOOK_SECRET = process.env.SECRET_TOKEN;
+
+// Only run one Git job at a time.
+const QUEUE = new PromiseQueue(1, Infinity);
+module.exports.QUEUE = QUEUE;
 
 // Git config.
 if (process.env.AFROBOT_ENV !== 'test') {
@@ -72,12 +77,12 @@ function postHandler (data, githubSignature) {
     }
 
     if (data.repository.full_name === config.repo) {
-      bumpAframeDist(data);
-      bumpAframeDocs(data);
+      QUEUE.add(() => bumpAframeDist(data));
+      QUEUE.add(() => bumpAframeDocs(data));
     }
 
     if (data.repository.full_name === config.repoRegistry) {
-      bumpAframeRegistry(data);
+      QUEUE.add(() => bumpAframeRegistry(data));
     }
   }
 

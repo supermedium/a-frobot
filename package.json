@@ -8,8 +8,8 @@
     "dev": "AFROBOT_ENV=test node index.js",
     "lint": "semistandard -v | snazzy",
     "start": "NODE_ENV=production AFROBOT_ENV=production forever start index.js",
-    "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests"
-    "update": "git pull --rebase origin master && forever restart 0",
+    "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests",
+    "update": "git pull --rebase origin master && forever restart 0"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,8 @@
     "body-parser": "^1.15.2",
     "buffer-equal-constant-time": "^1.0.1",
     "express": "^4.14.0",
-    "heroku-node-settings": "^1.0.2"
+    "heroku-node-settings": "^1.0.2",
+    "promise-queue": "^2.2.3"
   },
   "devDependencies": {
     "forever": "^0.15.3",
