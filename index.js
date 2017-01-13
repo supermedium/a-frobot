@@ -81,16 +81,17 @@ function postHandler (data, githubSignature) {
     if (data.repository.full_name === config.repo) {
       QUEUE.add(() => bumpAframeDist(data));
       QUEUE.add(() => bumpAframeDocs(data));
-
-      if (data.action === 'created' && data.comment) {
-        QUEUE.add(() => cherryPickDocCommit(data));
-      }
     }
 
     // A-Frame Registry repository.
     if (data.repository.full_name === config.repoRegistry) {
       QUEUE.add(() => bumpAframeRegistry(data));
     }
+  }
+
+  if (data.action === 'created' && data.comment) {
+    console.log(`Received comment ${data.comment.body}.`);
+    QUEUE.add(() => cherryPickDocCommit(data));
   }
 
   return 200;
