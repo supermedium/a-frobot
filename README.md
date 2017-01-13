@@ -1,6 +1,7 @@
 # A-Frobot
 
 A-Frame GitHub bot.
+
 ![a-frobot](https://avatars0.githubusercontent.com/u/24716791?v=3&s=460)
 
 [Latest A-Frame GitHub Pages](https://a-frobot.github.io/aframe/)
