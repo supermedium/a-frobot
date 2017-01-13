@@ -33,6 +33,17 @@ describe('bumpAframeDist', () => {
     });
   });
 
+  it('calls git commit with compare URL', (done) => {
+    BumpAframeDist.bumpAframeDist(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON).then(result => {
+      const calls = execSpy.getCalls();
+      calls.forEach(call  => {
+        if (call.args[0].indexOf('git commit') === -1) { return; }
+        assert.ok(call.args[0].indexOf(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON.compare) !== -1);
+      });
+      done();
+    });
+  });
+
   it('calls git push', (done) => {
     BumpAframeDist.bumpAframeDist(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON).then(result => {
       const calls = execSpy.getCalls();
