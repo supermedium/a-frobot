@@ -45,22 +45,18 @@ npm run start
 forever logs 0
 ```
 
+### Staging
+
+```sh
+npm run startstaging
+```
+
 ## Repository Setup
 
 - aframevr/aframe - Webhook + Write Access
 - aframevr/aframe-registry - Webhook + Write Access
 - aframevr/aframe-site
 - aframevr/aframevr.github.io - Write Access
-
-## Setting up a Staging Environment
-
-```
-heroku create --remote staging
-heroku config:set GITHUB_TOKEN=abc123 --remote staging
-heroku config:set SECRET_TOKEN=def456 --remote staging
-heroku config:set AFROBOT_ENV=staging --remote staging
-git push staging master
-```
 
 ## Heroku Setup
 
@@ -87,6 +83,16 @@ as an environment variable called `SECRET_TOKEN`:
 
 ```
 heroku config:set SECRET_TOKEN=def456
+```
+
+### Setting up a Staging Environment
+
+```
+heroku create --remote staging
+heroku config:set GITHUB_TOKEN=abc123 --remote staging
+heroku config:set SECRET_TOKEN=def456 --remote staging
+heroku config:set AFROBOT_ENV=staging --remote staging
+git push staging master
 ```
 
 ### Helpful Commands
