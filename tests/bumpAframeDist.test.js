@@ -77,18 +77,6 @@ describe('shouldBumpAframeDist', () => {
   });
 });
 
-describe('replaceVersion', () => {
-  it('replaces raw version', () => {
-    const newStr = BumpAframeDist.replaceVersion(`\n"version": "0.4.0",\n`, 'abc123');
-    assert.equal(newStr, `\n"version": "0.4.0-#abc123",\n`);
-  });
-
-  it('replaces hashed version', () => {
-    const newStr = BumpAframeDist.replaceVersion(`\n"version": "0.4.0-#abc123",\n`, 'def456');
-    assert.equal(newStr, `\n"version": "0.4.0-#def456",\n`);
-  });
-});
-
 describe('replaceReadmeCdnUrl', () => {
   it('replaces a URL', () => {
     const newStr = BumpAframeDist.replaceReadmeCdnUrl(
