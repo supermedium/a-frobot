@@ -114,6 +114,7 @@ function cloneRepositories () {
 
   function clone (dir, repo) {
     return cb => {
+      if (fs.existsSync(dir)) { return cb(); }
       childProcess.spawn('git', ['clone', `https://${GITHUB_TOKEN}@github.com/${repo}.git`], {
         stdio: 'inherit'
       }).on('close', function () {
