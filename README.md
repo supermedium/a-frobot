@@ -1,4 +1,4 @@
-# a-frobot
+#s A-Frobot
 
 A-Frame GitHub bot.
 
@@ -16,13 +16,15 @@ Deployed on Heroku.
 
 ## AWS Setup
 
-Open inbound port 80.
+Open inbound ports in the AWS Security Group on the console. A-Frobot defaults
+to port 5000 for production and port 6000 for staging.
 
 ```sh
 sudo apt-get install git node npm
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 bash && nvm install v6
 git clone git@github.com:ngokevin/a-frobot && cd a-frobot && npm install
+cp tokens.js.dist tokens.js
 ```
 
 Have a GitHub account and get a GitHub personal access token. Put the token
