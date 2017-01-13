@@ -11,8 +11,8 @@ Deployed on Heroku.
 - When the A-Frame code or package.json is updated, bump the A-Frame master builds.
 - When the A-Frame documentation is updated, deploy the documentation on the A-Frame site.
 - When the A-Frame Registry is updated, bump the A-Frame Registry builds and site.
-- When a contributor gives a command, cherry-pick a commit to a documentation branch and
-  deploy.
+- When a contributor comments `@a-frobot docs-v0.4.0` on a commit, cherry-pick
+  the commit to the documentation branch and deploy.
 
 ## AWS Setup
 
