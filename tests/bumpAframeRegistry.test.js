@@ -3,7 +3,6 @@ var assert = require('assert');
 var childProcess = require('child_process');
 var sinon = require('sinon');
 
-var AFRO = require('../index');
 var BumpAframeRegistry = require('../lib/bumpAframeRegistry');
 
 var FIXTURE_REGISTRY_COMMIT = require('./fixtures/registryCommit');

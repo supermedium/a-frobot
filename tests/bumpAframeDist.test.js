@@ -4,10 +4,8 @@ const childProcess = require('child_process');
 const fs = require('fs');
 const sinon = require('sinon');
 
-const AFRO = require('../index');
 const BumpAframeDist = require('../lib/bumpAframeDist');
 
-const FIXTURE_AFRAME_COMMIT_BOT = require('./fixtures/aframeCommitBot');
 const FIXTURE_AFRAME_COMMIT_DOCS = require('./fixtures/aframeCommitDocs');
 const FIXTURE_AFRAME_COMMIT_MULTI = require('./fixtures/aframeCommitMulti');
 const FIXTURE_AFRAME_COMMIT_PACKAGE_JSON = require('./fixtures/aframeCommitPackageJson');
@@ -43,7 +41,7 @@ describe('bumpAframeDist', () => {
     BumpAframeDist.bumpAframeDist(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON).then(result => {
       const calls = execSpy.getCalls();
       let checked = false;
-      calls.forEach(call  => {
+      calls.forEach(call => {
         if (checked || call.args[0].indexOf('git commit') === -1) { return; }
         assert.ok(call.args[0].indexOf(FIXTURE_AFRAME_COMMIT_PACKAGE_JSON.compare) !== -1);
         checked = true;

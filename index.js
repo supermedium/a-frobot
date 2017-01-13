@@ -120,7 +120,7 @@ function cloneRepositories () {
         stdio: 'inherit'
       }).on('close', function () {
         console.log(`${dir} cloned`);
-        this.kill('SIGINT')
+        this.kill('SIGINT');
         cb();
       });
     };

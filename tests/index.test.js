@@ -1,4 +1,4 @@
-/* global describe, it */
+/* global afterEach, beforeEach, describe, it */
 var assert = require('assert');
 var childProcess = require('child_process');
 var sinon = require('sinon');

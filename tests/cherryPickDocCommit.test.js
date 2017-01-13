@@ -3,7 +3,6 @@ var assert = require('assert');
 var childProcess = require('child_process');
 var sinon = require('sinon');
 
-var AFRO = require('../index');
 var CherryPickDocCommit = require('../lib/cherryPickDocCommit');
 
 var FIXTURE_AFRAME_COMMIT_COMMENT = require('./fixtures/aframeCommitComment');
