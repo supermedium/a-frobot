@@ -57,6 +57,7 @@ npm run startstaging
 - aframevr/aframe-registry - Webhook + Write Access
 - aframevr/aframe-site
 - aframevr/aframevr.github.io - Write Access
+- a-frobot/aframe - Fork
 
 ## Heroku Setup
 
