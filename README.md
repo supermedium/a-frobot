@@ -1,14 +1,16 @@
-#s A-Frobot
+# A-Frobot
 
 A-Frame GitHub bot.
-
 ![a-frobot](https://avatars0.githubusercontent.com/u/24716791?v=3&s=460)
 
-Deployed on Heroku.
+[Latest A-Frame GitHub Pages](https://a-frobot.github.io/aframe/)
+
+Deployed on AWS.
 
 ## Actions
 
-- When the A-Frame code or package.json is updated, bump the A-Frame master builds.
+- When the A-Frame code or package.json is updated, bump the A-Frame master
+  builds and the bot's fork's GitHub Pages of A-Frame.
 - When the A-Frame master builds are bumped: update README, package.json, and bump again.
 - When the A-Frame documentation is updated, deploy the documentation on the A-Frame site.
 - When the A-Frame Registry is updated, bump the A-Frame Registry builds and site.
