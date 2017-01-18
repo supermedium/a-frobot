@@ -7,7 +7,7 @@
     "deploy": "git push origin master && git push staging master && git push heroku master",
     "dev": "AFROBOT_ENV=test node index.js",
     "lint": "semistandard -v | snazzy",
-    "start": "NODE_ENV=production AFROBOT_ENV=production forever start index.js",
+    "start": "NODE_ENV=production AFROBOT_ENV=production forever -l log.log -e err.log start index.js",
     "startstaging": "NODE_ENV=production AFROBOT_ENV=staging forever start index.js",
     "test": "AFROBOT_ENV=test GITHUB_TOKEN=abc SECRET_TOKEN=def mocha --harmony --harmony-proxies tests",
     "update": "git pull --rebase origin master && npm install && forever restart 0",

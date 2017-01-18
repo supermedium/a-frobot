@@ -42,3 +42,4 @@ config.local.js
 *.sw[ponm]
 tokens.js
 aframe*
+*.log
