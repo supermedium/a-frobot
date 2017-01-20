@@ -60,7 +60,7 @@ npm run startstaging
 
 - aframevr/aframe - Webhook + Write Access
 - aframevr/aframe-registry - Webhook + Write Access
-- aframevr/aframe-site
+- aframevr/aframe-site - Webhook
 - aframevr/aframevr.github.io - Write Access
 - a-frobot/aframe - Fork
 
