@@ -16,7 +16,8 @@ Deployed on AWS.
 - When the A-Frame documentation is updated, deploy the documentation on the A-Frame site.
 - When the A-Frame Registry is updated, bump the A-Frame Registry builds and site.
 - When a contributor comments `@a-frobot docs-v0.4.0` on a commit, cherry-pick
-  the commit to the documentation branch and deploy.
+  the commit to the documentation branch and deploy the A-Frame site.
+- When the A-Frame site is updated, deploy the A-Frame site to `aframevr/aframevr.github.io`.
 
 ## AWS Setup
 
@@ -45,6 +46,9 @@ npm install -g forever
 npm run start
 forever logs 0
 ```
+
+For proper functioning, the instance should have at least 2GB of RAM, and the
+instance's volume should have at least 2GB of storage.
 
 ### Staging
 

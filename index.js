@@ -13,6 +13,7 @@ const bumpAframeDist = require('./lib/bumpAframeDist').bumpAframeDist;
 const bumpAframeDocs = require('./lib/bumpAframeDocs').bumpAframeDocs;
 const bumpAframeRegistry = require('./lib/bumpAframeRegistry').bumpAframeRegistry;
 const cherryPickDocCommit = require('./lib/cherryPickDocCommit').cherryPickDocCommit;
+const deployAframeSite = require('./lib/deployAframeSite').deployAframeSite;
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const WEBHOOK_SECRET = process.env.SECRET_TOKEN;
@@ -86,6 +87,11 @@ function postHandler (data, githubSignature) {
     // A-Frame Registry repository.
     if (data.repository.full_name === config.repoRegistry) {
       QUEUE.add(() => bumpAframeRegistry(data));
+    }
+
+    // A-Frame Site repository.
+    if (data.repository.full_name === config.repoSite) {
+      QUEUE.add(() => deployAframeSite(data));
     }
   }
 
