@@ -32,6 +32,7 @@
 
       ],
       "modified": [
+        "src/components/geometry.js",
         "src/index.js"
       ]
     },
@@ -59,6 +60,7 @@
 
       ],
       "modified": [
+        "src/components/material.js",
         "docs/introduction/index.md"
       ]
     }
