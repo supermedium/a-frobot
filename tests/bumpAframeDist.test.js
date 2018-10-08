@@ -78,11 +78,11 @@ describe('shouldBumpAframeDist', () => {
 describe('replaceReadmeCdnUrl', () => {
   it('replaces a URL', () => {
     const newStr = BumpAframeDist.replaceReadmeCdnUrl(
-      `\n    <script src="https://rawgit.com/aframevr/aframe/abc123/dist/aframe-master.min.js">\n`,
+      `\n    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@abc123/dist/aframe-master.min.js">\n`,
       'def456'
     );
     assert.equal(newStr,
-      `\n    <script src="https://rawgit.com/aframevr/aframe/def456/dist/aframe-master.min.js">\n`
+      `\n    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@def456/dist/aframe-master.min.js">\n`
     );
   });
 });
