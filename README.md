@@ -28,7 +28,7 @@ to port 5000 for production and port 5001 for staging.
 sudo apt-get install git node npm
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 bash && nvm install v6
-git clone git@github.com:ngokevin/a-frobot && cd a-frobot && npm install
+git clone git@github.com:supermedium/a-frobot && cd a-frobot && npm install
 cp tokens.js.dist tokens.js
 ```
 
