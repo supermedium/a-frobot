@@ -60,7 +60,7 @@ function initExpressApp () {
  */
 function postHandler (data, githubSignature) {
   // Validate payload.
-  if (!bufferEq(new Buffer(computeSignature(data)), new Buffer(githubSignature))) {
+  if (!bufferEq(new Buffer.from(computeSignature(data)), new Buffer.from(githubSignature))) {
     console.log('Received invalid GitHub webhook signature. Check SECRET_TOKEN.');
     return 403;
   }
