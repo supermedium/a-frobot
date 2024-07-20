@@ -25,9 +25,14 @@ Open inbound ports in the AWS Security Group on the console. A-Frobot defaults
 to port 5000 for production and port 5001 for staging.
 
 ```sh
-sudo apt-get install git node npm
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
-bash && nvm install v6
+sudo apt-get install git
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
+open a new console with `bash`, then continue:
+
+```sh
+nvm install 22
+nvm alias default 22 # needed if you previously installed an older version
 git clone git@github.com:supermedium/a-frobot && cd a-frobot && npm install
 cp tokens.js.dist tokens.js
 ```
@@ -43,9 +48,8 @@ token in `tokens.js` as `SECRET_TOKEN`. Make sure the content type for the
 webhook is set to `application/json`.
 
 ```sh
-npm install -g forever
 npm run start
-forever logs 0
+./node_modules/.bin/forever logs 0
 ```
 
 For proper functioning, the instance should have at least 2GB of RAM, and the
