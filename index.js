@@ -28,9 +28,6 @@ if (process.env.AFROBOT_ENV !== 'test') {
   childProcess.execSync(`git config --global user.name ${config.userName}`);
 }
 
-// Limit memory usage.
-childProcess.execSync('npm config set jobs 1');
-
 initExpressApp();
 
 /**
@@ -63,7 +60,7 @@ function initExpressApp () {
  */
 function postHandler (data, githubSignature) {
   // Validate payload.
-  if (!bufferEq(new Buffer(computeSignature(data)), new Buffer(githubSignature))) {
+  if (!bufferEq(new Buffer.from(computeSignature(data)), new Buffer.from(githubSignature))) {
     console.log('Received invalid GitHub webhook signature. Check SECRET_TOKEN.');
     return 403;
   }
